@@ -1,0 +1,74 @@
+import axios from 'axios';
+
+export const API_STATUS = {
+  CHECKING: 'checking',
+  ONLINE: 'online',
+  OFFLINE: 'offline',
+};
+
+export const isMockDataAllowed = import.meta.env.DEV;
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+const listeners = new Set();
+
+let currentStatus = {
+  status: API_STATUS.CHECKING,
+  isAvailable: false,
+  lastCheckedAt: null,
+  error: '',
+};
+
+export function getApiStatusSnapshot() {
+  return currentStatus;
+}
+
+export function subscribeToApiStatus(listener) {
+  listeners.add(listener);
+  listener(currentStatus);
+  return () => listeners.delete(listener);
+}
+
+export function setApiStatus(nextStatus) {
+  currentStatus = {
+    ...currentStatus,
+    ...nextStatus,
+    lastCheckedAt: nextStatus.lastCheckedAt || new Date().toISOString(),
+  };
+  listeners.forEach((listener) => listener(currentStatus));
+}
+
+export function markApiAvailable() {
+  setApiStatus({
+    status: API_STATUS.ONLINE,
+    isAvailable: true,
+    error: '',
+  });
+}
+
+export function markApiUnavailable(error = 'The API is unavailable.') {
+  setApiStatus({
+    status: API_STATUS.OFFLINE,
+    isAvailable: false,
+    error,
+  });
+}
+
+export async function checkApiHealth() {
+  try {
+    // Keep health checks independent from the app axios instance to avoid interceptor loops.
+    const response = await axios.get(`${API_BASE_URL}/health`, {
+      timeout: 5000,
+    });
+
+    const data = response.data;
+    if (!data?.success || data?.status !== 'ok') {
+      throw new Error('The API health response was invalid.');
+    }
+
+    markApiAvailable();
+    return currentStatus;
+  } catch (error) {
+    markApiUnavailable(error.message || 'The API health check failed.');
+    throw error;
+  }
+}
