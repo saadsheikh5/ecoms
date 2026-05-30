@@ -41,7 +41,7 @@ import {
 import { verifyAdminEmailChange, verifyAdminSession } from '../../api/services';
 import { isMockDataAllowed } from '../../api/status';
 
-const API_ORIGIN = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '');
+const API_ORIGIN = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : '')).replace(/\/api\/?$/, '');
 
 function resolveMediaUrl(url) {
   if (!url || typeof url !== 'string') return url;
