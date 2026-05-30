@@ -66,7 +66,7 @@ export default function Header({
     <header className={`sticky top-0 z-50 bg-[#d9006c] text-white shadow-md transition-transform duration-300 ease-in-out ${
       isNavVisible ? 'translate-y-0' : '-translate-y-full'
     }`}>
-      <div className="flex items-center justify-between px-3 sm:px-4 py-0 sm:py-1 h-14 sm:h-16 max-w-7xl mx-auto overflow-hidden">
+      <div className="flex items-center justify-between px-3 sm:px-4 py-1 sm:py-2 h-20 sm:h-24 max-w-7xl mx-auto overflow-hidden">
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="space-y-1 hover:opacity-80 transition"
@@ -81,13 +81,13 @@ export default function Header({
           <img
             src={logoSrc}
             alt="JTS Logo"
-            className="h-48 sm:h-44 lg:h-60 object-contain align-middle translate-y-4 sm:translate-y-3"
+            className="h-48 sm:h-44 lg:h-56 object-contain align-middle translate-y-4 sm:translate-y-3"
             style={{ maxWidth: '190px' }}
             onError={() => setLogoSrc(DEFAULT_LOGO)}
           />
           <h1 
-            className="-ml-5 sm:-ml-4 lg:-ml-6 text-[3.55rem] sm:text-5xl lg:text-6xl text-white whitespace-nowrap flex items-center font-bentley-script" 
-            style={{ lineHeight: 0.95, letterSpacing: '-0.04em', fontWeight: 700 }}
+            className="-ml-5 sm:-ml-4 lg:-ml-6 text-[2.7rem] sm:text-[3.2rem] lg:text-[3.6rem] text-white whitespace-nowrap flex items-center font-bentley-script" 
+            style={{ lineHeight: 1, letterSpacing: 0, fontWeight: 700 }}
           >
             JTS&nbsp;&nbsp;&nbsp;Beauty
           </h1>
