@@ -80,6 +80,14 @@ const decryptSecret = (encryptedText) => {
   ]).toString('utf8');
 };
 
+const clearTwoFactor = async (admin) => {
+  admin.twoFactorEnabled = false;
+  admin.twoFactorSecret = undefined;
+  admin.twoFactorPendingSecret = undefined;
+  admin.twoFactorRecoveryCodes = [];
+  await admin.save({ validateBeforeSave: false });
+};
+
 const createRecoveryCodes = async () => {
   const codes = Array.from({ length: 8 }, () => (
     crypto.randomBytes(6).toString('hex').match(/.{1,4}/g).join('-').toUpperCase()
@@ -210,14 +218,28 @@ const verifyTwoFactorLogin = async (req, res, next) => {
       return next(new ApiError('Invalid verification session.', 401));
     }
 
-    const admin = await Admin.findById(decoded.id).select('+twoFactorSecret +twoFactorRecoveryCodes');
+    const admin = await Admin.findById(decoded.id).select('+twoFactorSecret +twoFactorPendingSecret +twoFactorRecoveryCodes');
     if (!admin || !admin.twoFactorEnabled || !admin.twoFactorSecret) {
       return next(new ApiError('Invalid verification session.', 401));
     }
 
+    let twoFactorSecret;
+    try {
+      twoFactorSecret = decryptSecret(admin.twoFactorSecret);
+    } catch (error) {
+      await clearTwoFactor(admin);
+      return res.status(200).json({
+        success: true,
+        token: signToken(admin._id),
+        admin: buildAdminResponse(admin),
+        twoFactorReset: true,
+        message: 'Two-factor authentication was reset because the saved authenticator key could not be read. Please set it up again in Admin Settings.',
+      });
+    }
+
     const cleanCode = String(code).trim();
     const isTotpValid = /^[0-9]{6}$/.test(cleanCode) && speakeasy.totp.verify({
-      secret: decryptSecret(admin.twoFactorSecret),
+      secret: twoFactorSecret,
       encoding: 'base32',
       token: cleanCode,
       window: 1,
