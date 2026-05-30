@@ -49,7 +49,7 @@ const getAllProducts = async (req, res, next) => {
 // @access  Public
 const getProduct = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id || req.query.id);
     if (!product) return next(new ApiError('Product not found.', 404));
     res.status(200).json({ success: true, data: product });
   } catch (error) { next(error); }
@@ -85,6 +85,9 @@ const createProduct = async (req, res, next) => {
 // @access  Private (admin)
 const updateProduct = async (req, res, next) => {
   try {
+    const productId = req.params.id || req.query.id || req.body.id || req.body._id;
+    if (!productId) return next(new ApiError('Product id is required.', 400));
+
     const { title, description, category, price, stock, variants, isFeatured, images } = req.body;
 
     const updateData = { title, description, category, price, stock };
@@ -100,7 +103,7 @@ const updateProduct = async (req, res, next) => {
     }
 
     const product = await Product.findByIdAndUpdate(
-      req.params.id,
+      productId,
       updateData,
       { new: true, runValidators: true }
     );
@@ -114,7 +117,10 @@ const updateProduct = async (req, res, next) => {
 // @access  Private (admin)
 const deleteProduct = async (req, res, next) => {
   try {
-    const product = await Product.findByIdAndDelete(req.params.id);
+    const productId = req.params.id || req.query.id || req.body.id || req.body._id;
+    if (!productId) return next(new ApiError('Product id is required.', 400));
+
+    const product = await Product.findByIdAndDelete(productId);
     if (!product) return next(new ApiError('Product not found.', 404));
     res.status(200).json({ success: true, message: 'Product deleted successfully.' });
   } catch (error) { next(error); }

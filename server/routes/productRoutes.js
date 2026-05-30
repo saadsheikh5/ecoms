@@ -10,6 +10,11 @@ router.post('/', protect, upload.fields([
   { name: 'images', maxCount: 8 },
   { name: 'image', maxCount: 1 },
 ]), createProduct);
+router.put('/', protect, upload.fields([
+  { name: 'images', maxCount: 8 },
+  { name: 'image', maxCount: 1 },
+]), updateProduct);
+router.delete('/', protect, deleteProduct);
 router.put('/:id', protect, upload.fields([
   { name: 'images', maxCount: 8 },
   { name: 'image', maxCount: 1 },
