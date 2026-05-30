@@ -21,13 +21,13 @@ const parseImages = (images) => {
 const getUploadedImagePaths = (files) => {
   if (!files) return [];
   if (Array.isArray(files)) {
-    return files.map((file) => `/uploads/${file.filename}`);
+    return files.map((file) => file.path);
   }
 
   return [
     ...(files.images || []),
     ...(files.image || []),
-  ].map((file) => `/uploads/${file.filename}`);
+  ].map((file) => file.path);
 };
 
 const hasUploadedImages = (files) => getUploadedImagePaths(files).length > 0;
