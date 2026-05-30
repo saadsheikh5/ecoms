@@ -9,6 +9,34 @@ import {
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const API_ORIGIN = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : 'https://ecoms-e28hqt4e.b4a.run/api')).replace(/\/api\/?$/, '');
+const STATIC_IMAGE_FALLBACKS = [
+  { match: /bob wig\s*-\s*dark/i, image: 'images/Dark Bob lace.jpeg' },
+  { match: /bob wig\s*-\s*orange|light color bob/i, image: 'images/light bob wig.jpeg' },
+  { match: /bob wig\s*-\s*blue/i, image: 'images/Dark Bob lace.jpeg' },
+  { match: /bob wig\s*-\s*purple/i, image: 'images/dark bob lace purple1.jpeg' },
+  { match: /burmese curl/i, image: 'images/burmese-curl-1.PNG' },
+  { match: /water wave/i, image: 'images/water-wave-2.PNG' },
+  { match: /pineapple wave/i, image: 'images/pineapple wave.PNG' },
+  { match: /straight/i, image: 'images/straight.png' },
+  { match: /bodywave|body wave/i, image: 'images/body-wave-1.PNG' },
+  { match: /deepwave|deep wave/i, image: 'images/DEEPWAVE.jpeg' },
+  { match: /tri color/i, image: 'images/tri color body wave.png' },
+];
+
+function getStaticFallbackImage(product) {
+  const label = `${product?.title || ''} ${product?.name || ''} ${product?.style || ''}`;
+  return STATIC_IMAGE_FALLBACKS.find(({ match }) => match.test(label))?.image || '';
+}
+
+function isLegacyLocalUploadUrl(url) {
+  if (!url || typeof url !== 'string' || !/^https?:/i.test(url)) return false;
+  try {
+    const parsedUrl = new URL(url);
+    return ['localhost', '127.0.0.1', '::1'].includes(parsedUrl.hostname) && parsedUrl.pathname.startsWith('/uploads/');
+  } catch {
+    return false;
+  }
+}
 
 function resolveMediaUrl(url) {
   if (!url || typeof url !== 'string') return url;
@@ -73,8 +101,12 @@ function normalizeProduct(p) {
     name: p.name || p.title,
     price: priceStr,
     id: p._id || p.id,
-    image: resolveMediaUrl(p.image),
-    images: (p.images?.length ? p.images : (p.image ? [p.image] : [])).map(resolveMediaUrl),
+    image: isLegacyLocalUploadUrl(p.image) && getStaticFallbackImage(p) ? getStaticFallbackImage(p) : resolveMediaUrl(p.image || getStaticFallbackImage(p)),
+    images: [...new Set([
+      ...(isLegacyLocalUploadUrl(p.image) && getStaticFallbackImage(p) ? [getStaticFallbackImage(p)] : []),
+      ...(p.images?.length ? p.images : (p.image ? [p.image] : [])),
+      getStaticFallbackImage(p),
+    ].filter(Boolean).map(resolveMediaUrl))],
   };
 }
 
