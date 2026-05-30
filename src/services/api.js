@@ -12,7 +12,16 @@ const API_ORIGIN = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http
 
 function resolveMediaUrl(url) {
   if (!url || typeof url !== 'string') return url;
-  if (/^(https?:|data:|blob:)/i.test(url)) return url;
+  if (/^(data:|blob:)/i.test(url)) return url;
+  if (/^https?:/i.test(url)) {
+    try {
+      const parsedUrl = new URL(url);
+      const isLocalUpload = ['localhost', '127.0.0.1', '::1'].includes(parsedUrl.hostname) && parsedUrl.pathname.startsWith('/uploads/');
+      return isLocalUpload ? `${API_ORIGIN}${parsedUrl.pathname}` : url;
+    } catch {
+      return url;
+    }
+  }
   if (url.startsWith('/uploads/') || url.startsWith('uploads/')) {
     return `${API_ORIGIN}${url.startsWith('/') ? url : `/${url}`}`;
   }
