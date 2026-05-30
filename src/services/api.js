@@ -334,7 +334,7 @@ export async function createAdminProduct(productData) {
 }
 
 export async function updateAdminProduct(id, productData) {
-  const response = await api.put(`/products/${id}`, buildProductPayload(productData), {
+  const response = await api.put(`/products?id=${encodeURIComponent(id)}`, buildProductPayload(productData), {
     preserveAdminSessionOnAuthError: true,
     skipHealthUpdate: true,
     timeout: 30000,
@@ -343,7 +343,7 @@ export async function updateAdminProduct(id, productData) {
 }
 
 export async function deleteAdminProduct(id) {
-  await api.delete(`/products/${id}`, {
+  await api.delete(`/products?id=${encodeURIComponent(id)}`, {
     preserveAdminSessionOnAuthError: true,
     skipHealthUpdate: true,
   });

@@ -23,7 +23,7 @@ export async function getProducts(category) {
  * Fetch a single product details by ID.
  */
 export async function getProduct(id) {
-  const response = await api.get(`/products/${id}`);
+  const response = await api.get(`/products?id=${encodeURIComponent(id)}`);
   return readApiData(response, 'product');
 }
 
@@ -46,7 +46,7 @@ export async function updateProduct(id, productData) {
   const headers = productData instanceof FormData 
     ? { 'Content-Type': 'multipart/form-data' } 
     : undefined;
-  const response = await api.put(`/products/${id}`, productData, { headers });
+  const response = await api.put(`/products?id=${encodeURIComponent(id)}`, productData, { headers });
   return readApiData(response, 'update product');
 }
 
@@ -54,7 +54,7 @@ export async function updateProduct(id, productData) {
  * Delete a product by ID (Admin authenticated).
  */
 export async function deleteProduct(id) {
-  const response = await api.delete(`/products/${id}`);
+  const response = await api.delete(`/products?id=${encodeURIComponent(id)}`);
   return response.data;
 }
 
