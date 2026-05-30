@@ -175,7 +175,7 @@ const login = async (req, res, next) => {
       return next(new ApiError('Please provide email and password.', 400));
     }
 
-    const admin = await Admin.findOne({ email: normalizeEmail(email) }).select('+password +twoFactorSecret');
+    const admin = await Admin.findOne({ email: normalizeEmail(email) }).select('+password +twoFactorSecret +twoFactorPendingSecret +twoFactorRecoveryCodes');
     if (!admin) {
       return next(new ApiError('Invalid email or password.', 401));
     }
@@ -186,6 +186,19 @@ const login = async (req, res, next) => {
     }
 
     if (admin.twoFactorEnabled && admin.twoFactorSecret) {
+      try {
+        decryptSecret(admin.twoFactorSecret);
+      } catch (error) {
+        await clearTwoFactor(admin);
+        return res.status(200).json({
+          success: true,
+          token: signToken(admin._id),
+          admin: buildAdminResponse(admin),
+          twoFactorReset: true,
+          message: 'Two-factor authentication was reset because the saved authenticator key could not be read. Please set it up again in Admin Settings.',
+        });
+      }
+
       return res.status(200).json({
         success: true,
         twoFactorRequired: true,
