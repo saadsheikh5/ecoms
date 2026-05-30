@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, ExternalLink, Facebook, Instagram, Mail, Music2, Phone } from 'lucide-react';
+import { Clock, ExternalLink, Facebook, Instagram, Mail, MessageCircle, Music2, Phone } from 'lucide-react';
 
 export default function Footer({ setActivePage, setSelectedProductType, setSelectedCategory }) {
   const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Bands';
@@ -35,6 +35,11 @@ export default function Footer({ setActivePage, setSelectedProductType, setSelec
       label: 'TikTok',
       href: 'https://www.tiktok.com/@jtsbeauty?_r=1&_t=ZP-96CYRj8ubNP',
       icon: Music2,
+    },
+    {
+      label: 'WhatsApp',
+      href: 'https://wa.me/15612553698',
+      icon: MessageCircle,
     },
   ];
 
