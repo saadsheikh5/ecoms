@@ -48,7 +48,8 @@ app.use(cors({
 
 const limiter = rateLimit({
   windowMs: readPositiveInt(process.env.RATE_LIMIT_WINDOW_MS, 10 * 60 * 1000),
-  max: readPositiveInt(process.env.RATE_LIMIT_MAX, isProduction ? 100 : 1000),
+  max: readPositiveInt(process.env.RATE_LIMIT_MAX, isProduction ? 2000 : 1000),
+  skip: (req) => req.method === 'OPTIONS' || req.path === '/health',
   message: 'Too many requests from this IP, please try again later.',
 });
 app.use('/api', limiter);
