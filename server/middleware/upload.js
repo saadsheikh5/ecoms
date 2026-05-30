@@ -12,9 +12,10 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    // Give file a unique name: timestamp + original extension
+    // Give each uploaded file a unique name, even when several arrive in one request.
     const ext = path.extname(file.originalname);
-    cb(null, `product-${Date.now()}${ext}`);
+    const suffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    cb(null, `product-${suffix}${ext}`);
   },
 });
 

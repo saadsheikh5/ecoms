@@ -38,17 +38,6 @@ function isLegacyLocalUploadUrl(url) {
   }
 }
 
-function isUploadUrl(url) {
-  if (!url || typeof url !== 'string') return false;
-  if (url.startsWith('/uploads/') || url.startsWith('uploads/')) return true;
-  if (!/^https?:/i.test(url)) return false;
-  try {
-    return new URL(url).pathname.startsWith('/uploads/');
-  } catch {
-    return false;
-  }
-}
-
 function resolveMediaUrl(url) {
   if (!url || typeof url !== 'string') return url;
   if (/^(data:|blob:)/i.test(url)) return url;
@@ -94,7 +83,7 @@ function normalizeProduct(p) {
   const isWig = p.category === 'Wigs';
   const staticFallbackImage = getStaticFallbackImage(p);
   const apiImages = (p.images?.length ? p.images : (p.image ? [p.image] : []))
-    .filter((image) => !(staticFallbackImage && isUploadUrl(image)));
+    .filter((image) => !isLegacyLocalUploadUrl(image));
   
   // Format the price string correctly based on category
   let priceStr = p.price;
