@@ -30,6 +30,8 @@ const getUploadedImagePaths = (files) => {
   ].map((file) => `/uploads/${file.filename}`);
 };
 
+const hasUploadedImages = (files) => getUploadedImagePaths(files).length > 0;
+
 // @route   GET /api/products
 // @access  Public
 const getAllProducts = async (req, res, next) => {
@@ -88,7 +90,7 @@ const updateProduct = async (req, res, next) => {
     const updateData = { title, description, category, price, stock };
     if (isFeatured !== undefined) updateData.isFeatured = isFeatured === true || isFeatured === 'true';
     if (variants) updateData.variants = parseVariants(variants);
-    if (images !== undefined || req.files?.length) {
+    if (images !== undefined || hasUploadedImages(req.files)) {
       const nextImages = [
         ...parseImages(images),
         ...getUploadedImagePaths(req.files),

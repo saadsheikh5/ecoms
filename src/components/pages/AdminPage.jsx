@@ -71,17 +71,6 @@ function isLegacyLocalUploadUrl(url) {
   }
 }
 
-function isUploadUrl(url) {
-  if (!url || typeof url !== 'string') return false;
-  if (url.startsWith('/uploads/') || url.startsWith('uploads/')) return true;
-  if (!/^https?:/i.test(url)) return false;
-  try {
-    return new URL(url).pathname.startsWith('/uploads/');
-  } catch {
-    return false;
-  }
-}
-
 function resolveMediaUrl(url) {
   if (!url || typeof url !== 'string') return url;
   if (/^(data:|blob:)/i.test(url)) return url;
@@ -324,7 +313,7 @@ export default function AdminPage({ setActivePage, productCategories, onReviewsC
         image: isLegacyLocalUploadUrl(p.image) && getStaticFallbackImage(p) ? getStaticFallbackImage(p) : resolveMediaUrl(p.image || getStaticFallbackImage(p)),
         images: [...new Set([
           ...(isLegacyLocalUploadUrl(p.image) && getStaticFallbackImage(p) ? [getStaticFallbackImage(p)] : []),
-          ...(p.images?.length ? p.images : (p.image ? [p.image] : [])).filter((image) => !(getStaticFallbackImage(p) && isUploadUrl(image))),
+          ...(p.images?.length ? p.images : (p.image ? [p.image] : [])).filter((image) => !isLegacyLocalUploadUrl(image)),
           getStaticFallbackImage(p),
         ].filter(Boolean).map(resolveMediaUrl))],
       };
