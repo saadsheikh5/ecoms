@@ -7,8 +7,9 @@ export const API_STATUS = {
 };
 
 export const isMockDataAllowed = import.meta.env.DEV;
-export const isApiConfigured = Boolean(import.meta.env.VITE_API_URL) || import.meta.env.DEV;
-export const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : '');
+const PRODUCTION_API_URL = 'https://ecoms-9zwelcjo.b4a.run/api';
+export const isApiConfigured = Boolean(import.meta.env.VITE_API_URL) || import.meta.env.DEV || Boolean(PRODUCTION_API_URL);
+export const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : PRODUCTION_API_URL);
 
 const listeners = new Set();
 
