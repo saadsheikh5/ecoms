@@ -15,6 +15,7 @@ dotenv.config();
 
 const app = express();
 const isProduction = process.env.NODE_ENV === 'production';
+const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
 const readPositiveInt = (value, fallback) => {
   const parsed = Number.parseInt(value, 10);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
@@ -22,6 +23,8 @@ const readPositiveInt = (value, fallback) => {
 const allowedOrigins = new Set([
   process.env.FRONTEND_URL,
   process.env.CLIENT_URL,
+  'https://saadsheikh5.github.io',
+  'https://saadsheikh5.github.io/ecoms',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
   'http://localhost:5173',
@@ -128,7 +131,22 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(() => {
+const validateEnvironment = () => {
+  const missing = requiredEnvVars.filter((key) => !process.env[key]);
+  if (missing.length > 0) {
+    console.error(`Missing required environment variables: ${missing.join(', ')}`);
+    process.exit(1);
+  }
+};
+
+validateEnvironment();
+
+connectDB().then((connection) => {
+  if (!connection) {
+    console.error('Server startup aborted because MongoDB connection could not be established.');
+    process.exit(1);
+  }
+
   const server = app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV}`);
