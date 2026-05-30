@@ -9,6 +9,26 @@ const devIndexPath = join(root, 'dev.html');
 const distPath = join(root, 'dist');
 const distAssetsPath = join(distPath, 'assets');
 const rootAssetsPath = join(root, 'assets');
+const pages404Html = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JTS Beauty World - Luxury Wigs</title>
+    <script>
+      (function () {
+        var basePath = '/ecoms';
+        var path = window.location.pathname || '';
+        var route = path.indexOf(basePath) === 0 ? path.slice(basePath.length) : path;
+        route = route.replace(/^\\/+/, '');
+        var hashRoute = route ? '#/' + route + window.location.search : window.location.hash || '#/';
+        window.location.replace(basePath + '/' + hashRoute);
+      }());
+    </script>
+  </head>
+  <body></body>
+</html>
+`;
 
 const sourceIndex = readFileSync(devIndexPath, 'utf8');
 const originalIndex = existsSync(indexPath) ? readFileSync(indexPath, 'utf8') : '';
@@ -21,9 +41,6 @@ try {
   });
 
   const distIndexPath = join(distPath, 'index.html');
-  const fixedDistIndex = readFileSync(distIndexPath, 'utf8')
-    .replace('href="/vite.svg"', 'href="/ecoms/vite.svg"');
-  writeFileSync(distIndexPath, fixedDistIndex);
 
   mkdirSync(rootAssetsPath, { recursive: true });
 
@@ -40,8 +57,8 @@ try {
   }
 
   copyFileSync(distIndexPath, indexPath);
-  copyFileSync(distIndexPath, join(root, '404.html'));
-  copyFileSync(distIndexPath, join(distPath, '404.html'));
+  writeFileSync(join(root, '404.html'), pages404Html);
+  writeFileSync(join(distPath, '404.html'), pages404Html);
 } catch (error) {
   if (originalIndex) {
     writeFileSync(indexPath, originalIndex);
