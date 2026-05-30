@@ -7,7 +7,7 @@ export const API_STATUS = {
 };
 
 export const isMockDataAllowed = import.meta.env.DEV;
-const PRODUCTION_API_URL = 'https://ecoms-ctx67tsi.b4a.run/api';
+const PRODUCTION_API_URL = 'https://ecoms-lkswc2a9.b4a.run/api';
 
 const normalizeApiUrl = (url) => {
   if (!url) return '';

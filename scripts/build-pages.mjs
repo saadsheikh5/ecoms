@@ -10,7 +10,7 @@ const distPath = join(root, 'dist');
 const distAssetsPath = join(distPath, 'assets');
 const rootAssetsPath = join(root, 'assets');
 const apiCachePath = join(root, 'src', 'constants', 'apiCache.js');
-const productionApiUrl = 'https://ecoms-ctx67tsi.b4a.run/api';
+const productionApiUrl = 'https://ecoms-lkswc2a9.b4a.run/api';
 const pages404Html = `<!doctype html>
 <html lang="en">
   <head>
