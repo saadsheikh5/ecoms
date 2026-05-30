@@ -2,7 +2,7 @@ import React from 'react';
 import { Clock, ExternalLink, Facebook, Instagram, Mail, Music2, Phone } from 'lucide-react';
 
 export default function Footer({ setActivePage, setSelectedProductType, setSelectedCategory }) {
-  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Head Bands';
+  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Bands';
 
   const handleCategoryClick = (category) => {
     setSelectedProductType?.(category);
@@ -130,4 +130,5 @@ export default function Footer({ setActivePage, setSelectedProductType, setSelec
     </footer>
   );
 }
+
 

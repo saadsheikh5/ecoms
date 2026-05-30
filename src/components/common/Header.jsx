@@ -3,7 +3,7 @@ import { ShoppingBag, Search, Menu } from 'lucide-react';
 
 const SETTINGS_STORAGE_KEY = 'jtsAdminSettings';
 const DEFAULT_LOGO = 'images/logonew.png';
-const BONNETS_DISPLAY_LABEL = 'Bonnets And Fashion/Lace Head Bands';
+const BONNETS_DISPLAY_LABEL = 'Bonnets And Fashion/Lace Bands';
 
 const getSavedLogo = () => {
   try {
@@ -206,4 +206,5 @@ export default function Header({
     </header>
   );
 }
+
 
