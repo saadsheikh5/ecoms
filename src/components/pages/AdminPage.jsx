@@ -41,7 +41,7 @@ import {
 import { verifyAdminEmailChange, verifyAdminSession } from '../../api/services';
 import { isMockDataAllowed } from '../../api/status';
 
-const API_ORIGIN = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : 'https://ecoms-e28hqt4e.b4a.run/api')).replace(/\/api\/?$/, '');
+const API_ORIGIN = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : 'https://ecoms-gk0xmzc2.b4a.run/api')).replace(/\/api\/?$/, '');
 const STATIC_IMAGE_FALLBACKS = [
   { match: /bob wig\s*-\s*dark/i, image: 'images/Dark Bob lace.jpeg' },
   { match: /bob wig\s*-\s*orange|light color bob/i, image: 'images/light bob wig.jpeg' },
