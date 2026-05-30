@@ -153,6 +153,7 @@ export default function App() {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [toastMessage, setToastMessage] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [catalogRefreshKey, setCatalogRefreshKey] = useState(0);
 
   // Dynamic Product Data States (Backend Ready)
   const [wigCategories, setWigCategories] = useState(defaultWigCategories);
@@ -239,7 +240,7 @@ export default function App() {
       }
     }
     loadData();
-  }, [apiStatus.isAvailable, apiStatus.retryCount]);
+  }, [apiStatus.isAvailable, apiStatus.retryCount, catalogRefreshKey]);
 
   // Header Hide/Show on Scroll Handler
   useEffect(() => {
@@ -385,6 +386,7 @@ export default function App() {
         productCategories={productCategories}
         wigCategories={wigCategories}
         onReviewsChange={setHomeReviews}
+        onProductsChange={() => setCatalogRefreshKey((key) => key + 1)}
         apiAvailable={apiStatus.isAvailable}
         commerceReady={liveCommerceReady}
       />

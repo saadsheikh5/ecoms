@@ -257,7 +257,7 @@ function AdminLayout({ setActivePage, products, setProducts, orders, setOrders, 
 }
 
 // Root AdminPage — handles auth state
-export default function AdminPage({ setActivePage, productCategories, onReviewsChange, apiAvailable = true }) {
+export default function AdminPage({ setActivePage, productCategories, onReviewsChange, onProductsChange, apiAvailable = true }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isCheckingSession, setIsCheckingSession] = useState(() => !!localStorage.getItem('adminToken'));
   const [isLoading, setIsLoading] = useState(false);
@@ -568,6 +568,7 @@ export default function AdminPage({ setActivePage, productCategories, onReviewsC
     }
 
     setProducts(nextProducts);
+    onProductsChange?.();
   };
 
   const handleOrdersChange = async (newOrdersOrFunc) => {
