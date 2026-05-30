@@ -35,7 +35,9 @@ router.get('/2fa/status', protect, getTwoFactorStatus);
 router.post('/2fa/setup', protect, setupTwoFactor);
 router.post('/2fa/confirm', protect, confirmTwoFactor);
 router.post('/2fa/disable', protect, disableTwoFactor);
-// Run this once to create your first admin, then disable it
-router.post('/create-admin', createAdmin);
+// Enable only while bootstrapping the first production admin.
+if (process.env.ALLOW_ADMIN_BOOTSTRAP === 'true' || process.env.NODE_ENV !== 'production') {
+  router.post('/create-admin', createAdmin);
+}
 
 module.exports = router;
