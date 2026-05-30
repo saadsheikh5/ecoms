@@ -39,7 +39,7 @@ import CheckoutPage from './components/pages/CheckoutPage';
 import AdminPage from './components/pages/AdminPage';
 
 const CART_STORAGE_KEY = 'jtsBeautyCart';
-const BONNETS_DISPLAY_LABEL = 'Bonnets And Fashion/Lace Head Bands';
+const BONNETS_DISPLAY_LABEL = 'Bonnets And Fashion/Lace Bands';
 let savedCartCache;
 
 const STATIC_PRODUCT_CATEGORIES = {
@@ -744,6 +744,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 

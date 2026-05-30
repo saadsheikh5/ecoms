@@ -15,7 +15,7 @@ export default function ProductsPage({
   commerceDisabled = false,
   apiStatus
 }) {
-  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Head Bands';
+  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Bands';
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const isSearching = normalizedQuery.length > 0;
 
@@ -489,6 +489,7 @@ export default function ProductsPage({
     </section>
   );
 }
+
 
 
 
