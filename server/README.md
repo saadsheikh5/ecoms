@@ -43,6 +43,19 @@ server/
 
 ---
 
+## Image Safety For Back4App
+
+Product uploads use Cloudinary storage. Do not store new production product images in `server/uploads/`, because Back4App containers can replace local files during deploys/restarts.
+
+Keep these environment variables unset in Back4App:
+
+```
+ALLOW_IMAGE_REMOVAL=true
+ALLOW_DESTRUCTIVE_SEED=true
+```
+
+By default, product updates preserve existing image references when an update accidentally submits an empty image list, and the seed reset refuses to clear collections unless `ALLOW_DESTRUCTIVE_SEED=true` is explicitly set.
+
 ## 🚀 Getting Started
 
 ### 1. Install MongoDB

@@ -59,7 +59,6 @@ try {
   copyFileSync(distIndexPath, indexPath);
   writeFileSync(join(root, '404.html'), pages404Html);
   writeFileSync(join(distPath, '404.html'), pages404Html);
-  writeFileSync(indexPath, sourceIndex);
 } catch (error) {
   if (originalIndex) {
     writeFileSync(indexPath, originalIndex);
