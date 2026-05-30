@@ -15,6 +15,7 @@ export default function ProductsPage({
   commerceDisabled = false,
   apiStatus
 }) {
+  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Head Bands';
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const isSearching = normalizedQuery.length > 0;
 
@@ -144,7 +145,11 @@ export default function ProductsPage({
             <h2 className="text-5xl font-black mt-3 uppercase">
               {isSearching
                 ? resultCount > 0 ? 'Search Results' : 'No Results'
-                : selectedProductType === 'All Products' ? 'All Products' : selectedProductType}
+                : selectedProductType === 'All Products'
+                  ? 'All Products'
+                  : selectedProductType === 'Bonnets'
+                    ? bonnetsDisplayLabel
+                    : selectedProductType}
             </h2>
             {isSearching && (
               <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -241,11 +246,13 @@ export default function ProductsPage({
           </div>
         )}
 
-        {/* BONNETS SECTION */}
+        {/* BONNETS AND HEAD BANDS SECTION */}
         {!isSearching && (selectedProductType === 'Bonnets' || selectedProductType === 'All Products') && (
           <div id="products-bonnets" className="mb-8 scroll-mt-28">
             {selectedProductType === 'All Products' && (
-              <h3 className="text-4xl font-bold uppercase tracking-wide mb-8 text-[#1a1a1a]">Bonnets</h3>
+              <h3 className="text-4xl font-bold uppercase tracking-wide mb-8 text-[#1a1a1a]">
+                {bonnetsDisplayLabel}
+              </h3>
             )}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {displayedBonnets.map((product, index) => (

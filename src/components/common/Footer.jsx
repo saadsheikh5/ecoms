@@ -2,6 +2,8 @@ import React from 'react';
 import { Clock, ExternalLink, Facebook, Instagram, Mail, Music2, Phone } from 'lucide-react';
 
 export default function Footer({ setActivePage, setSelectedProductType, setSelectedCategory }) {
+  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Head Bands';
+
   const handleCategoryClick = (category) => {
     setSelectedProductType?.(category);
     if (category === 'Wigs') {
@@ -14,7 +16,7 @@ export default function Footer({ setActivePage, setSelectedProductType, setSelec
   const categoryLinks = [
     { label: 'Wigs', value: 'Wigs' },
     { label: 'Products', value: 'All Products' },
-    { label: 'Bonnets', value: 'Bonnets' },
+    { label: bonnetsDisplayLabel, value: 'Bonnets' },
     { label: 'Hair Care', value: 'Hair Products' },
   ];
 

@@ -3,6 +3,7 @@ import { ShoppingBag, Search, Menu } from 'lucide-react';
 
 const SETTINGS_STORAGE_KEY = 'jtsAdminSettings';
 const DEFAULT_LOGO = 'images/logonew.png';
+const BONNETS_DISPLAY_LABEL = 'Bonnets And Fashion/Lace Head Bands';
 
 const getSavedLogo = () => {
   try {
@@ -160,7 +161,7 @@ export default function Header({
               type="search"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Search wigs, bonnets, lace..."
+                placeholder="Search wigs, head bands, lace..."
               autoFocus
               onBlur={() => {
                 if (!searchQuery.trim()) {
@@ -172,13 +173,13 @@ export default function Header({
           </form>
         )}
 
-        <div className="flex whitespace-nowrap gap-8 px-8 py-4 text-sm sm:text-base items-center justify-around">
+        <div className="flex gap-4 px-4 sm:px-8 py-4 text-xs sm:text-base items-center justify-around">
           <button 
             onClick={() => {
               setSelectedProductType('Wigs');
               setActivePage('products');
             }}
-            className="hover:text-[#d9006c] transition font-bold"
+            className="flex-1 hover:text-[#d9006c] transition font-bold text-center"
           >
             Wigs
           </button>
@@ -187,16 +188,16 @@ export default function Header({
               setSelectedProductType('Bonnets');
               setActivePage('products');
             }}
-            className="hover:text-[#d9006c] transition font-bold"
+            className="flex-[1.7] hover:text-[#d9006c] transition font-bold text-center leading-tight"
           >
-            Bonnets
+            {BONNETS_DISPLAY_LABEL}
           </button>
           <button 
             onClick={() => {
               setSelectedProductType('All Products');
               setActivePage('products');
             }}
-            className="hover:text-[#d9006c] transition font-bold"
+            className="flex-1 hover:text-[#d9006c] transition font-bold text-center"
           >
             Products
           </button>

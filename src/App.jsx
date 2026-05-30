@@ -39,6 +39,7 @@ import CheckoutPage from './components/pages/CheckoutPage';
 import AdminPage from './components/pages/AdminPage';
 
 const CART_STORAGE_KEY = 'jtsBeautyCart';
+const BONNETS_DISPLAY_LABEL = 'Bonnets And Fashion/Lace Head Bands';
 let savedCartCache;
 
 const STATIC_PRODUCT_CATEGORIES = {
@@ -457,7 +458,7 @@ export default function App() {
             />
           )}
 
-          {/* Bonnets Section */}
+          {/* Bonnets and head bands section */}
           <section className="bg-white py-8 px-4 sm:px-6 lg:px-10">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-6">
@@ -465,7 +466,7 @@ export default function App() {
                   Accessories & Care
                 </p>
                 <h2 className="text-4xl sm:text-5xl font-bold mt-2">
-                  Bonnets
+                  {BONNETS_DISPLAY_LABEL}
                 </h2>
               </div>
 

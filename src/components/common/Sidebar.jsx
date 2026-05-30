@@ -11,9 +11,10 @@ export default function Sidebar({
 }) {
   if (!sidebarOpen) return null;
 
+  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Head Bands';
   const categories = [
     { label: 'Wigs', sectionId: 'products-wigs' },
-    { label: 'Bonnets', sectionId: 'products-bonnets' },
+    { label: bonnetsDisplayLabel, sectionId: 'products-bonnets' },
     { label: 'Lace Tints', sectionId: 'products-lace-tints' },
     { label: 'Lace Glues', sectionId: 'products-lace-glues' },
     { label: 'Hair Care', sectionId: 'products-hair-care' },
