@@ -29,6 +29,7 @@ function getStaticFallbackImage(product) {
 }
 
 function isLegacyLocalUploadUrl(url) {
+  if (import.meta.env.DEV) return false;
   if (!url || typeof url !== 'string' || !/^https?:/i.test(url)) return false;
   try {
     const parsedUrl = new URL(url);
@@ -84,6 +85,7 @@ function normalizeProduct(p) {
   const staticFallbackImage = getStaticFallbackImage(p);
   const apiImages = (p.images?.length ? p.images : (p.image ? [p.image] : []))
     .filter((image) => !isLegacyLocalUploadUrl(image));
+  const displayImages = apiImages.length > 0 ? apiImages : [staticFallbackImage].filter(Boolean);
   
   // Format the price string correctly based on category
   let priceStr = p.price;
@@ -104,12 +106,8 @@ function normalizeProduct(p) {
     name: p.name || p.title,
     price: priceStr,
     id: p._id || p.id,
-    image: isLegacyLocalUploadUrl(p.image) && staticFallbackImage ? staticFallbackImage : resolveMediaUrl(p.image || staticFallbackImage),
-    images: [...new Set([
-      ...(isLegacyLocalUploadUrl(p.image) && staticFallbackImage ? [staticFallbackImage] : []),
-      ...apiImages,
-      staticFallbackImage,
-    ].filter(Boolean).map(resolveMediaUrl))],
+    image: resolveMediaUrl(displayImages[0] || ''),
+    images: [...new Set(displayImages.map(resolveMediaUrl))],
   };
 }
 

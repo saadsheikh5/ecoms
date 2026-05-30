@@ -62,6 +62,7 @@ function getStaticFallbackImage(product) {
 }
 
 function isLegacyLocalUploadUrl(url) {
+  if (import.meta.env.DEV) return false;
   if (!url || typeof url !== 'string' || !/^https?:/i.test(url)) return false;
   try {
     const parsedUrl = new URL(url);
@@ -291,6 +292,10 @@ export default function AdminPage({ setActivePage, productCategories, onReviewsC
   const normalizeProducts = (apiProducts) => {
     return apiProducts.map(p => {
       const isWig = (p.category || p.adminCategory) === 'Wigs';
+      const staticFallbackImage = getStaticFallbackImage(p);
+      const apiImages = (p.images?.length ? p.images : (p.image ? [p.image] : []))
+        .filter((image) => !isLegacyLocalUploadUrl(image));
+      const displayImages = apiImages.length > 0 ? apiImages : [staticFallbackImage].filter(Boolean);
       let priceStr = p.price;
       if (typeof p.price === 'number') {
         // Wigs show "From $X", all others show "$X.XX"
@@ -310,12 +315,8 @@ export default function AdminPage({ setActivePage, productCategories, onReviewsC
         isFeatured: Boolean(p.isFeatured),
         price: priceStr,
         stock: p.stock !== undefined ? p.stock : 10,
-        image: isLegacyLocalUploadUrl(p.image) && getStaticFallbackImage(p) ? getStaticFallbackImage(p) : resolveMediaUrl(p.image || getStaticFallbackImage(p)),
-        images: [...new Set([
-          ...(isLegacyLocalUploadUrl(p.image) && getStaticFallbackImage(p) ? [getStaticFallbackImage(p)] : []),
-          ...(p.images?.length ? p.images : (p.image ? [p.image] : [])).filter((image) => !isLegacyLocalUploadUrl(image)),
-          getStaticFallbackImage(p),
-        ].filter(Boolean).map(resolveMediaUrl))],
+        image: resolveMediaUrl(displayImages[0] || ''),
+        images: [...new Set(displayImages.map(resolveMediaUrl))],
       };
     });
   };
