@@ -8,8 +8,18 @@ export const API_STATUS = {
 
 export const isMockDataAllowed = import.meta.env.DEV;
 const PRODUCTION_API_URL = 'https://ecoms-gk0xmzc2.b4a.run/api';
-export const isApiConfigured = Boolean(import.meta.env.VITE_API_URL) || import.meta.env.DEV || Boolean(PRODUCTION_API_URL);
-export const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : PRODUCTION_API_URL);
+
+const normalizeApiUrl = (url) => {
+  if (!url) return '';
+  const trimmedUrl = String(url).trim();
+  if (!trimmedUrl) return '';
+  const absoluteUrl = /^https?:\/\//i.test(trimmedUrl) ? trimmedUrl : `https://${trimmedUrl}`;
+  return absoluteUrl.replace(/\/+$/, '');
+};
+
+export const API_BASE_URL = normalizeApiUrl(import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : PRODUCTION_API_URL));
+export const API_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, '');
+export const isApiConfigured = Boolean(API_BASE_URL);
 
 const listeners = new Set();
 
