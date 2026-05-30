@@ -7,7 +7,12 @@ async function seedInMemoryDatabase() {
   try {
     console.log('Seeding in-memory database with initial datasets...');
 
-    // 1. Clear collections
+    if (process.env.ALLOW_DESTRUCTIVE_SEED !== 'true') {
+      console.log('Skipping destructive seed reset. Set ALLOW_DESTRUCTIVE_SEED=true only for disposable local data.');
+      return;
+    }
+
+    // 1. Clear collections. Never enable this in production or on Back4App.
     await Admin.deleteMany({});
     await Product.deleteMany({});
     await Review.deleteMany({});

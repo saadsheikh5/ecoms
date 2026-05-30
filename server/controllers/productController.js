@@ -32,6 +32,8 @@ const getUploadedImagePaths = (files) => {
 
 const hasUploadedImages = (files) => getUploadedImagePaths(files).length > 0;
 
+const imageRemovalAllowed = () => process.env.ALLOW_IMAGE_REMOVAL === 'true';
+
 // @route   GET /api/products
 // @access  Public
 const getAllProducts = async (req, res, next) => {
@@ -89,6 +91,8 @@ const updateProduct = async (req, res, next) => {
     if (!productId) return next(new ApiError('Product id is required.', 400));
 
     const { title, description, category, price, stock, variants, isFeatured, images } = req.body;
+    const existingProduct = await Product.findById(productId);
+    if (!existingProduct) return next(new ApiError('Product not found.', 404));
 
     const updateData = { title, description, category, price, stock };
     if (isFeatured !== undefined) updateData.isFeatured = isFeatured === true || isFeatured === 'true';
@@ -98,8 +102,13 @@ const updateProduct = async (req, res, next) => {
         ...parseImages(images),
         ...getUploadedImagePaths(req.files),
       ];
-      updateData.images = nextImages;
-      updateData.image = nextImages[0] || '';
+      if (nextImages.length > 0 || imageRemovalAllowed()) {
+        updateData.images = nextImages;
+        updateData.image = nextImages[0] || '';
+      } else {
+        updateData.images = existingProduct.images?.length ? existingProduct.images : (existingProduct.image ? [existingProduct.image] : []);
+        updateData.image = existingProduct.image || updateData.images[0] || '';
+      }
     }
 
     const product = await Product.findByIdAndUpdate(
