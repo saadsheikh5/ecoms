@@ -1,5 +1,6 @@
 import api from '../api/axios';
 import { API_ORIGIN, isMockDataAllowed } from '../api/status';
+import { cachedProducts } from '../constants/apiCache';
 import { 
   wigCategories, 
   featuredProducts, 
@@ -8,6 +9,7 @@ import {
 } from '../constants/products';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const PRODUCT_CACHE_KEY = 'jtsBeautyLiveProductsCache:v1';
 const STATIC_IMAGE_FALLBACKS = [
   { match: /bob wig\s*-\s*dark/i, image: 'images/Dark Bob lace.jpeg' },
   { match: /bob wig\s*-\s*orange|light color bob/i, image: 'images/light bob wig.jpeg' },
@@ -73,6 +75,54 @@ async function getDevelopmentMockData(mockData, warning, error) {
   return [...mockData];
 }
 
+function readBrowserProductCache() {
+  if (typeof window === 'undefined') return [];
+  try {
+    const parsedCache = JSON.parse(window.localStorage.getItem(PRODUCT_CACHE_KEY) || 'null');
+    return Array.isArray(parsedCache?.products) ? parsedCache.products : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeBrowserProductCache(products) {
+  if (typeof window === 'undefined' || !Array.isArray(products) || products.length === 0) return;
+  try {
+    window.localStorage.setItem(PRODUCT_CACHE_KEY, JSON.stringify({
+      products,
+      updatedAt: new Date().toISOString(),
+    }));
+  } catch (error) {
+    console.warn('Unable to save live product cache.', error);
+  }
+}
+
+function mergeCachedProducts(products) {
+  if (!Array.isArray(products) || products.length === 0) return;
+  const currentProducts = getCachedProducts();
+  const productsById = new Map(currentProducts.map((product) => [product._id || product.id || product.title || product.name, product]));
+  products.forEach((product) => {
+    productsById.set(product._id || product.id || product.title || product.name, product);
+  });
+  writeBrowserProductCache([...productsById.values()]);
+}
+
+function getCachedProducts() {
+  const browserProducts = readBrowserProductCache();
+  return browserProducts.length > 0 ? browserProducts : cachedProducts;
+}
+
+async function getCachedProductData(filter, warning, error, fallbackData = []) {
+  const cached = getCachedProducts();
+  if (cached.length > 0) {
+    console.warn(`${warning} Cached live product data is being used.`, error);
+    await delay(50);
+    return cached.filter(filter).map(normalizeProduct);
+  }
+
+  return getDevelopmentMockData(fallbackData, warning, error);
+}
+
 /**
  * Normalize a backend product document into the UI-expected format.
  * - Wigs: price displayed as "From $X" (starting price)
@@ -113,9 +163,16 @@ function normalizeProduct(p) {
 export async function fetchWigCategories() {
   try {
     const response = await api.get('/products?category=Wigs');
-    return readDataArray(response, 'wigs').map(normalizeProduct);
+    const products = readDataArray(response, 'wigs');
+    mergeCachedProducts(products);
+    return products.map(normalizeProduct);
   } catch (error) {
-    return getDevelopmentMockData(wigCategories, 'Unable to load live wigs.', error);
+    return getCachedProductData(
+      (product) => product.category === 'Wigs',
+      'Unable to load live wigs.',
+      error,
+      wigCategories
+    );
   }
 }
 
@@ -123,34 +180,54 @@ export async function fetchFeaturedProducts() {
   try {
     const response = await api.get('/products?category=Wigs&featured=true');
     const featured = readDataArray(response, 'featured products');
-    if (featured.length > 0) return featured.map(normalizeProduct);
+    if (featured.length > 0) {
+      mergeCachedProducts(featured);
+      return featured.map(normalizeProduct);
+    }
 
     const allWigsResponse = await api.get('/products?category=Wigs');
-    return readDataArray(allWigsResponse, 'featured products')
-      .filter(p => p.isFeatured)
-      .map(normalizeProduct);
+    const products = readDataArray(allWigsResponse, 'featured products');
+    mergeCachedProducts(products);
+    return products.filter(p => p.isFeatured).map(normalizeProduct);
   } catch (error) {
-    return getDevelopmentMockData(featuredProducts, 'Unable to load live featured products.', error);
+    return getCachedProductData(
+      (product) => product.category === 'Wigs' && product.isFeatured,
+      'Unable to load live featured products.',
+      error,
+      featuredProducts
+    );
   }
 }
 
 export async function fetchBeautyProducts() {
   try {
     const response = await api.get('/products');
-    return readDataArray(response, 'beauty products')
-      .filter(p => p.category !== 'Wigs')
-      .map(normalizeProduct);
+    const products = readDataArray(response, 'beauty products');
+    writeBrowserProductCache(products);
+    return products.filter(p => p.category !== 'Wigs').map(normalizeProduct);
   } catch (error) {
-    return getDevelopmentMockData(beautyProducts, 'Unable to load live beauty products.', error);
+    return getCachedProductData(
+      (product) => product.category !== 'Wigs',
+      'Unable to load live beauty products.',
+      error,
+      beautyProducts
+    );
   }
 }
 
 export async function fetchBonnets() {
   try {
     const response = await api.get('/products?category=Bonnets');
-    return readDataArray(response, 'bonnets').map(normalizeProduct);
+    const products = readDataArray(response, 'bonnets');
+    mergeCachedProducts(products);
+    return products.map(normalizeProduct);
   } catch (error) {
-    return getDevelopmentMockData(bonnets, 'Unable to load live bonnets.', error);
+    return getCachedProductData(
+      (product) => product.category === 'Bonnets',
+      'Unable to load live bonnets.',
+      error,
+      bonnets
+    );
   }
 }
 

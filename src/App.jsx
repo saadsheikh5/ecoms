@@ -166,17 +166,6 @@ export default function App() {
   // Fetch product data on load to synchronize with the API service layer
   useEffect(() => {
     async function loadData() {
-      if (!apiStatus.isAvailable && !isMockDataAllowed) {
-        setWigCategories(defaultWigCategories);
-        setFeaturedProducts(defaultFeaturedProducts);
-        setBeautyProducts(defaultBeautyProducts);
-        setBonnets(defaultBonnets);
-        setProductCategories(STATIC_PRODUCT_CATEGORIES);
-        setCatalogSource('static');
-        setHomeReviews([]);
-        return;
-      }
-
       try {
         const wigs = await fetchWigCategories();
         setWigCategories(wigs);
@@ -209,21 +198,25 @@ export default function App() {
           'Hair Products': hairCareFiltered,
           'Lace Glues': glues,
         });
-        setCatalogSource('live');
+        setCatalogSource(apiStatus.isAvailable ? 'live' : 'cached');
 
-        try {
-          const reviewsData = await fetchHomepageReviews();
-          setHomeReviews(reviewsData.map(review => ({
-            id: review._id || review.id,
-            customer: review.customerName || review.customer,
-            product: review.product,
-            category: review.category,
-            rating: review.rating,
-            comment: review.comment,
-            showOnHome: Boolean(review.showOnHome),
-          })));
-        } catch (reviewError) {
-          console.warn('Unable to load homepage reviews.', reviewError);
+        if (apiStatus.isAvailable) {
+          try {
+            const reviewsData = await fetchHomepageReviews();
+            setHomeReviews(reviewsData.map(review => ({
+              id: review._id || review.id,
+              customer: review.customerName || review.customer,
+              product: review.product,
+              category: review.category,
+              rating: review.rating,
+              comment: review.comment,
+              showOnHome: Boolean(review.showOnHome),
+            })));
+          } catch (reviewError) {
+            console.warn('Unable to load homepage reviews.', reviewError);
+            setHomeReviews([]);
+          }
+        } else {
           setHomeReviews([]);
         }
       } catch (error) {
