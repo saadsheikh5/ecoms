@@ -6,7 +6,7 @@
   "homepage": "https://saadsheikh5.github.io/ecoms/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/build-pages.mjs",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
   },
