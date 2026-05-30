@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Star, MessageSquare, CheckCircle, ArrowLeft } from 'lucide-react';
 import { getReviews, createReview } from '../../api/services';
 import { isMockDataAllowed } from '../../api/status';
@@ -68,6 +68,10 @@ export default function ProductDetailsPage({
     : isMockDataAllowed ? ['150%', '180%', '200%', '230%', '250%'] : [];
 
   // --- Fetch Reviews on Mount ---
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [productId]);
+
   useEffect(() => {
     setActiveImage(productImages[0] || selectedProduct.image || '');
   }, [selectedProduct, productImages[0]]);
