@@ -15,6 +15,7 @@ import {
 } from './services/api';
 import { isMockDataAllowed } from './api/status';
 import { useApiStatus } from './context/ApiStatusContext';
+import { Facebook, Instagram, MessageCircle, Music2 } from 'lucide-react';
 
 // Shared Components
 import Header from './components/common/Header';
@@ -40,6 +41,28 @@ import AdminPage from './components/pages/AdminPage';
 
 const CART_STORAGE_KEY = 'jtsBeautyCart';
 const BONNETS_DISPLAY_LABEL = 'Bonnets And Fashion/Lace Bands';
+const SOCIAL_LINKS = [
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/jtsbeautyworld?utm_source=qr&igsh=MXgxOHV0cWZvdHE2Zg==',
+    icon: Instagram,
+  },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/share/177aaiVESS/',
+    icon: Facebook,
+  },
+  {
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@jtsbeauty?_r=1&_t=ZP-96CYRj8ubNP',
+    icon: Music2,
+  },
+  {
+    label: 'WhatsApp',
+    href: 'https://wa.me/15612553698',
+    icon: MessageCircle,
+  },
+];
 let savedCartCache;
 
 const STATIC_PRODUCT_CATEGORIES = {
@@ -371,8 +394,27 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#D5E8D4] text-[#1a1a1a] font-sans">
       {/* Top Welcome Bar */}
-      <div className="bg-[#D5E8D4] text-[#1a1a1a] text-center py-3 text-xs sm:text-sm tracking-[0.2em] uppercase font-medium">
-        Welcome To JTS Wigs - Luxury Wigs
+      <div className="bg-[#D5E8D4] text-[#1a1a1a] px-3 sm:px-6 py-2 text-[10px] sm:text-xs uppercase font-medium">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-2 sm:flex-row sm:justify-between">
+          <span className="text-center tracking-[0.2em]">
+            Welcome To JTS Wigs - Luxury Wigs
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 tracking-[0.14em]">
+            {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Follow JTS Beauty on ${label}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#d9006c] bg-[#d9006c] px-2.5 py-1 text-white shadow-sm transition hover:bg-[#ec4899] hover:border-[#ec4899]"
+              >
+                <Icon size={14} strokeWidth={2.2} />
+                <span>{label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Shared Header Navigation */}
