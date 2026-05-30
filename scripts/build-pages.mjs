@@ -40,6 +40,8 @@ try {
   }
 
   copyFileSync(distIndexPath, indexPath);
+  copyFileSync(distIndexPath, join(root, '404.html'));
+  copyFileSync(distIndexPath, join(distPath, '404.html'));
 } catch (error) {
   if (originalIndex) {
     writeFileSync(indexPath, originalIndex);
