@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="720" viewBox="0 0 1080 720" role="img" aria-labelledby="title desc">
+  <title id="title">No image available</title>
+  <desc id="desc">Placeholder image used when a product image is unavailable.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="720" rx="40" fill="url(#bg)" />
+  <rect x="120" y="120" width="840" height="480" rx="32" fill="#ffffff" stroke="#cbd5e1" stroke-width="12" />
+  <circle cx="420" cy="320" r="36" fill="#94a3b8" opacity="0.9" />
+  <path d="M520 240 L700 360 L820 260" fill="none" stroke="#94a3b8" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="540" y="560" text-anchor="middle" font-family="Inter, sans-serif" fill="#64748b" font-size="48">Image not available</text>
+</svg>

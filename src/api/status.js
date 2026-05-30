@@ -7,15 +7,16 @@ export const API_STATUS = {
 };
 
 export const isMockDataAllowed = import.meta.env.DEV;
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+export const isApiConfigured = Boolean(import.meta.env.VITE_API_URL) || import.meta.env.DEV;
+export const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : '');
 
 const listeners = new Set();
 
 let currentStatus = {
-  status: API_STATUS.CHECKING,
+  status: isApiConfigured ? API_STATUS.CHECKING : API_STATUS.OFFLINE,
   isAvailable: false,
   lastCheckedAt: null,
-  error: '',
+  error: isApiConfigured ? '' : 'Live API URL is not configured.',
 };
 
 export function getApiStatusSnapshot() {
@@ -54,6 +55,11 @@ export function markApiUnavailable(error = 'The API is unavailable.') {
 }
 
 export async function checkApiHealth() {
+  if (!isApiConfigured) {
+    markApiUnavailable('Live API URL is not configured.');
+    return currentStatus;
+  }
+
   try {
     // Keep health checks independent from the app axios instance to avoid interceptor loops.
     const response = await axios.get(`${API_BASE_URL}/health`, {
