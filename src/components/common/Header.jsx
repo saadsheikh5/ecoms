@@ -161,7 +161,7 @@ export default function Header({
               type="search"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Search wigs, head bands, lace..."
+                placeholder="Search head bands, lace, hair care..."
               autoFocus
               onBlur={() => {
                 if (!searchQuery.trim()) {
@@ -176,8 +176,8 @@ export default function Header({
         <div className="flex gap-4 px-4 sm:px-8 py-4 text-xs sm:text-base items-center justify-around">
           <button 
             onClick={() => {
-              setSelectedProductType('Wigs');
-              setActivePage('products');
+              setSelectedProductType('All Products');
+              setActivePage('home');
             }}
             className="flex-1 hover:text-[#d9006c] transition font-bold text-center"
           >
