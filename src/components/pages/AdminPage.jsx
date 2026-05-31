@@ -533,6 +533,7 @@ export default function AdminPage({ setActivePage, productCategories, onReviewsC
         return old && (
           old.title !== np.title ||
           old.adminCategory !== np.adminCategory ||
+          old.category !== np.category ||
           old.price !== np.price ||
           old.stock !== np.stock ||
           old.description !== np.description ||

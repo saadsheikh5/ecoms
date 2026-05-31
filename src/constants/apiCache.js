@@ -1,5 +1,24 @@
 export const cachedProducts = [
   {
+    "_id": "6a1c228688a94faac51c4687",
+    "title": "Lace bond glue",
+    "description": "",
+    "category": "Lace Glues",
+    "price": 7.5,
+    "stock": 10,
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780228742/jts-beauty/products/twnrlmkp4rhlmnhmmtfi.jpg",
+    "images": [
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780228742/jts-beauty/products/twnrlmkp4rhlmnhmmtfi.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229018/jts-beauty/products/kr8p4qcvwvictdomugyk.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229084/jts-beauty/products/e3jytgv2rafi7m4qqn4c.jpg"
+    ],
+    "isFeatured": false,
+    "variants": [],
+    "createdAt": "2026-05-31T11:59:02.681Z",
+    "updatedAt": "2026-05-31T12:04:44.565Z",
+    "__v": 0
+  },
+  {
     "_id": "6a1b20983444dd59a7cb3ff6",
     "title": "Bob Wig - Dark",
     "description": "Bob Wig - Dark\r\n• 13x4  \r\n• Transparent Lace",
@@ -1859,4 +1878,4 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:33.919Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-05-31T11:48:11.981Z";
+export const cachedProductsUpdatedAt = "2026-05-31T12:09:02.146Z";
