@@ -185,8 +185,8 @@ export default function Header({
           </button>
           <button 
             onClick={() => {
-              setSelectedProductType('Bonnets');
-              setActivePage('products');
+              setSelectedProductType('All Products');
+              setActivePage('home');
             }}
             className="flex-[1.7] hover:text-[#d9006c] transition font-bold text-center leading-tight"
           >

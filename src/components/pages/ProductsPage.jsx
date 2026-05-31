@@ -14,7 +14,6 @@ export default function ProductsPage({
   commerceDisabled = false,
   apiStatus
 }) {
-  const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Bands';
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const isSearching = normalizedQuery.length > 0;
 
@@ -34,12 +33,10 @@ export default function ProductsPage({
     return products.filter((product) => getProductText(product).includes(normalizedQuery));
   };
 
-  const displayedBonnets = filterProducts(productCategories['Bonnets']);
   const displayedLaceTints = filterProducts(productCategories['Lace Tints']);
   const displayedLaceGlues = filterProducts(productCategories['Lace Glues']);
   const displayedHairProducts = filterProducts(productCategories['Hair Products']);
   const searchResults = [
-    ...displayedBonnets,
     ...displayedLaceTints,
     ...displayedLaceGlues,
     ...displayedHairProducts,
@@ -144,9 +141,7 @@ export default function ProductsPage({
                 ? resultCount > 0 ? 'Search Results' : 'No Results'
                 : selectedProductType === 'All Products'
                   ? 'All Products'
-                  : selectedProductType === 'Bonnets'
-                    ? bonnetsDisplayLabel
-                    : selectedProductType}
+                  : selectedProductType}
             </h2>
             {isSearching && (
               <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -182,65 +177,6 @@ export default function ProductsPage({
               </div>
             )}
           </>
-        )}
-
-        {/* BONNETS AND HEAD BANDS SECTION */}
-        {!isSearching && (selectedProductType === 'Bonnets' || selectedProductType === 'All Products') && (
-          <div id="products-bonnets" className="mb-8 scroll-mt-28">
-            {selectedProductType === 'All Products' && (
-              <h3 className="text-4xl font-bold uppercase tracking-wide mb-8 text-[#1a1a1a]">
-                {bonnetsDisplayLabel}
-              </h3>
-            )}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-              {displayedBonnets.map((product, index) => (
-                <div
-                  key={`bonnet-${index}`}
-                  onClick={() => { setSelectedProduct(product); setActivePage('details'); }}
-                  className="bg-white overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 group cursor-pointer flex flex-col h-full"
-                >
-                  <div className="overflow-hidden bg-white">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="h-36 sm:h-48 w-full object-contain group-hover:scale-105 transition duration-500"
-                      onError={(e) => e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%23e6e1da" width="100" height="100"/%3E%3Ctext x="50" y="50" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image%3C/text%3E%3C/svg%3E'}
-                    />
-                  </div>
-
-                  <div className="p-5 text-center flex flex-col flex-grow">
-                    <h3 className="font-semibold text-lg">{product.name}</h3>
-                    
-                    <div className="mt-auto">
-                      <p className="text-[#1a1a1a] font-bold mt-4 text-xl">{product.price}</p>
-
-                      <div className="space-y-3 mt-5">
-                        <button 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedProduct(product);
-                            setActivePage('details');
-                          }}
-                          className="w-full border border-[#d9006c] px-4 py-3 text-sm uppercase tracking-[0.2em] hover:bg-[#d9006c] hover:text-white transition-all duration-300"
-                        >
-                          View Details
-                        </button>
-
-                        <button 
-                          onClick={(e) => { e.stopPropagation(); handleAddToCart(product); }}
-                          disabled={commerceDisabled}
-                          title={commerceDisabled ? 'Shopping is temporarily unavailable while store services reconnect.' : 'Add to cart'}
-                          className="w-full bg-[#d9006c] text-white px-4 py-3 text-sm uppercase tracking-[0.2em] hover:bg-[#ec4899] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {commerceDisabled ? 'Unavailable' : 'Add To Cart'}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         )}
 
         {/* LACE SECTION */}
