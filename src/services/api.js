@@ -97,6 +97,32 @@ function writeBrowserProductCache(products) {
   }
 }
 
+function getProductCacheKey(product) {
+  return product?._id || product?.id || product?.title || product?.name;
+}
+
+function upsertBrowserProductCache(product) {
+  if (typeof window === 'undefined' || !product) return;
+  const productKey = getProductCacheKey(product);
+  if (!productKey) return;
+
+  const browserCache = readBrowserProductCache();
+  const currentProducts = browserCache?.products?.length ? browserCache.products : cachedProducts;
+  const productsByKey = new Map(currentProducts.map((item) => [getProductCacheKey(item), item]));
+
+  productsByKey.set(productKey, product);
+  writeBrowserProductCache([...productsByKey.values()].filter(Boolean));
+}
+
+function removeBrowserProductCache(productId) {
+  if (typeof window === 'undefined' || !productId) return;
+
+  const browserCache = readBrowserProductCache();
+  const currentProducts = browserCache?.products?.length ? browserCache.products : cachedProducts;
+  const nextProducts = currentProducts.filter((product) => getProductCacheKey(product) !== productId);
+  writeBrowserProductCache(nextProducts);
+}
+
 function mergeCachedProducts(products) {
   if (!Array.isArray(products) || products.length === 0) return;
   const currentProducts = getCachedProducts();
@@ -414,6 +440,7 @@ export async function createAdminProduct(productData) {
     skipHealthUpdate: true,
     timeout: 30000,
   });
+  upsertBrowserProductCache(response.data.data);
   return response.data.data;
 }
 
@@ -423,6 +450,7 @@ export async function updateAdminProduct(id, productData) {
     skipHealthUpdate: true,
     timeout: 30000,
   });
+  upsertBrowserProductCache(response.data.data);
   return response.data.data;
 }
 
@@ -431,6 +459,7 @@ export async function deleteAdminProduct(id) {
     preserveAdminSessionOnAuthError: true,
     skipHealthUpdate: true,
   });
+  removeBrowserProductCache(id);
   return true;
 }
 
