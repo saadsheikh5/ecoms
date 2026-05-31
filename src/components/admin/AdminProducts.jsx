@@ -356,6 +356,7 @@ export default function AdminProducts({ products, setProducts, categories }) {
     const formattedProduct = {
       ...currentProduct,
       name: currentProduct.title,
+      category: currentProduct.adminCategory,
       image: currentProduct.images?.[0] || '',
       price: isWigCategory && variantPrices.length > 0
         ? `From $${Math.min(...variantPrices).toFixed(2)}`

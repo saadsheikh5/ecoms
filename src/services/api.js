@@ -445,7 +445,7 @@ export async function createAdminProduct(productData) {
 }
 
 export async function updateAdminProduct(id, productData) {
-  const response = await api.put(`/products?id=${encodeURIComponent(id)}`, buildProductPayload(productData), {
+  const response = await api.put(`/products/${encodeURIComponent(id)}`, buildProductPayload(productData), {
     preserveAdminSessionOnAuthError: true,
     skipHealthUpdate: true,
     timeout: 30000,
@@ -455,7 +455,7 @@ export async function updateAdminProduct(id, productData) {
 }
 
 export async function deleteAdminProduct(id) {
-  await api.delete(`/products?id=${encodeURIComponent(id)}`, {
+  await api.delete(`/products/${encodeURIComponent(id)}`, {
     preserveAdminSessionOnAuthError: true,
     skipHealthUpdate: true,
   });
@@ -464,13 +464,14 @@ export async function deleteAdminProduct(id) {
 }
 
 function buildProductPayload(productData) {
+  const payload = normalizeAdminProductPayload(productData);
   const imageFiles = productData.imageFiles || (productData.imageFile ? [productData.imageFile] : []);
   if (imageFiles.length === 0) {
-    return productData;
+    return payload;
   }
 
   const formData = new FormData();
-  Object.entries(productData).forEach(([key, value]) => {
+  Object.entries(payload).forEach(([key, value]) => {
     if (key === 'imageFile' || key === 'imageFiles') {
       return;
     } else if (key === 'image') {
@@ -486,4 +487,32 @@ function buildProductPayload(productData) {
   imageFiles.forEach((file) => formData.append('images', file));
 
   return formData;
+}
+
+function normalizeAdminProductPayload(productData = {}) {
+  const category = productData.category || productData.adminCategory || 'Wigs';
+  const images = Array.isArray(productData.images)
+    ? productData.images.filter((image) => image && !String(image).startsWith('data:'))
+    : [];
+  const variants = Array.isArray(productData.variants) ? productData.variants : [];
+
+  return {
+    title: productData.title || productData.name || '',
+    category,
+    price: parseFloat(String(productData.price ?? 0).replace(/[^0-9.-]+/g, '')) || 0,
+    stock: Number(productData.stock) || 0,
+    description: productData.description || '',
+    image: images[0] || productData.image || '',
+    images,
+    isFeatured: category === 'Wigs' ? Boolean(productData.isFeatured) : false,
+    variants: category === 'Wigs'
+      ? variants.map((variant) => ({
+          length: String(variant.length || '').trim(),
+          density: String(variant.density || '').trim(),
+          price: parseFloat(variant.price) || 0,
+          stock: Number.parseInt(variant.stock, 10) || 0,
+          sku: variant.sku || '',
+        })).filter((variant) => variant.length && variant.density)
+      : [],
+  };
 }
