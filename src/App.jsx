@@ -15,7 +15,7 @@ import {
 } from './services/api';
 import { isMockDataAllowed } from './api/status';
 import { useApiStatus } from './context/ApiStatusContext';
-import { Facebook, Instagram, MessageCircle, Music2 } from 'lucide-react';
+import { Facebook, Instagram, MessageCircle } from 'lucide-react';
 
 // Shared Components
 import Header from './components/common/Header';
@@ -51,11 +51,6 @@ const SOCIAL_LINKS = [
     label: 'Facebook',
     href: 'https://www.facebook.com/share/177aaiVESS/',
     icon: Facebook,
-  },
-  {
-    label: 'TikTok',
-    href: 'https://www.tiktok.com/@jtsbeauty?_r=1&_t=ZP-96CYRj8ubNP',
-    icon: Music2,
   },
   {
     label: 'WhatsApp',
