@@ -13,7 +13,6 @@ export default function Sidebar({
 
   const bonnetsDisplayLabel = 'Bonnets And Fashion/Lace Bands';
   const categories = [
-    { label: 'Wigs', sectionId: 'products-wigs' },
     { label: bonnetsDisplayLabel, sectionId: 'products-bonnets' },
     { label: 'Lace Tints', sectionId: 'products-lace-tints' },
     { label: 'Lace Glues', sectionId: 'products-lace-glues' },

@@ -4,7 +4,6 @@ import MaintenanceNotice from '../common/MaintenanceNotice';
 export default function ProductsPage({
   selectedProductType,
   setActivePage,
-  wigCategories,
   productCategories,
   setSelectedProduct,
   handleAddToCart,
@@ -35,13 +34,11 @@ export default function ProductsPage({
     return products.filter((product) => getProductText(product).includes(normalizedQuery));
   };
 
-  const displayedWigs = filterProducts(wigCategories);
   const displayedBonnets = filterProducts(productCategories['Bonnets']);
   const displayedLaceTints = filterProducts(productCategories['Lace Tints']);
   const displayedLaceGlues = filterProducts(productCategories['Lace Glues']);
   const displayedHairProducts = filterProducts(productCategories['Hair Products']);
   const searchResults = [
-    ...(filterProducts(productCategories['Wigs']) || []),
     ...displayedBonnets,
     ...displayedLaceTints,
     ...displayedLaceGlues,
@@ -185,65 +182,6 @@ export default function ProductsPage({
               </div>
             )}
           </>
-        )}
-
-        {/* WIGS SECTION */}
-        {!isSearching && (selectedProductType === 'Wigs' || selectedProductType === 'All Products') && (
-          <div id="products-wigs" className="mb-8 scroll-mt-28">
-            {selectedProductType === 'All Products' && (
-              <h3 className="text-4xl font-bold uppercase tracking-wide mb-8 text-[#1a1a1a]">Wigs</h3>
-            )}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-              {displayedWigs.map((wig, index) => (
-                <div
-                  key={`wig-${index}`}
-                  onClick={() => { setSelectedProduct(wig); setActivePage('details'); }}
-                  className="bg-white overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 group cursor-pointer flex flex-col h-full"
-                >
-                  <div className="overflow-hidden bg-white">
-                    <img
-                      src={wig.image}
-                      alt={wig.title}
-                      className="h-36 sm:h-48 w-full object-contain group-hover:scale-105 transition duration-500"
-                    />
-                  </div>
-
-                  <div className="p-5 text-center flex flex-col flex-grow">
-                    <h3 className="text-xl font-semibold uppercase tracking-wide">
-                      {wig.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 mt-2 flex-grow line-clamp-2">{wig.description}</p>
-                    
-                    <div className="mt-auto">
-                      <p className="mt-4 font-bold text-lg text-[#1a1a1a] ">{wig.price}</p>
-
-                      <div className="space-y-3 mt-5">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedProduct(wig);
-                            setActivePage('details');
-                          }}
-                          className="border border-[#d9006c] text-[#1a1a1a] px-5 py-3 text-sm uppercase tracking-[0.2em] hover:bg-[#d9006c] hover:text-white transition-all duration-300 w-full"
-                        >
-                          View Details
-                        </button>
-
-                        <button
-                          onClick={(e) => { e.stopPropagation(); handleAddToCart(wig); }}
-                          disabled={commerceDisabled}
-                          title={commerceDisabled ? 'Shopping is temporarily unavailable while store services reconnect.' : 'Add to cart'}
-                          className="w-full bg-[#d9006c] text-white px-4 py-3 text-sm uppercase tracking-[0.2em] hover:bg-[#ec4899] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {commerceDisabled ? 'Unavailable' : 'Add To Cart'}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         )}
 
         {/* BONNETS AND HEAD BANDS SECTION */}
