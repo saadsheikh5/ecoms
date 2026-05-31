@@ -1150,14 +1150,16 @@ export const cachedProducts = [
     "category": "Hair Products",
     "price": 20,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171841/jts_beauty/products/joxxkkyhqtsob17mpwlx.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780223621/jts-beauty/products/axnzmqgghapfuvna3voi.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171842/jts_beauty/products/qocfshl4ctsj90erjqsq.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780223621/jts-beauty/products/axnzmqgghapfuvna3voi.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780223632/jts-beauty/products/mx59ggujbxypfed0n6ii.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780223641/jts-beauty/products/tbeu1gf0lr2jsjxsyc9n.jpg"
     ],
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-05-26T20:57:04.737Z",
-    "updatedAt": "2026-05-30T20:10:43.542Z",
+    "updatedAt": "2026-05-31T10:34:01.790Z",
     "__v": 1
   },
   {
@@ -1876,4 +1878,4 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:33.919Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-05-31T10:27:56.909Z";
+export const cachedProductsUpdatedAt = "2026-05-31T10:37:15.359Z";
