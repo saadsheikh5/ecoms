@@ -1,6 +1,6 @@
 import api from '../api/axios';
 import { API_ORIGIN, isMockDataAllowed } from '../api/status';
-import { cachedProducts } from '../constants/apiCache';
+import { cachedProducts, cachedProductsUpdatedAt } from '../constants/apiCache';
 import { 
   wigCategories, 
   featuredProducts, 
@@ -79,9 +79,9 @@ function readBrowserProductCache() {
   if (typeof window === 'undefined') return [];
   try {
     const parsedCache = JSON.parse(window.localStorage.getItem(PRODUCT_CACHE_KEY) || 'null');
-    return Array.isArray(parsedCache?.products) ? parsedCache.products : [];
+    return Array.isArray(parsedCache?.products) ? parsedCache : null;
   } catch {
-    return [];
+    return null;
   }
 }
 
@@ -108,8 +108,18 @@ function mergeCachedProducts(products) {
 }
 
 function getCachedProducts() {
-  const browserProducts = readBrowserProductCache();
-  return browserProducts.length > 0 ? browserProducts : cachedProducts;
+  const browserCache = readBrowserProductCache();
+  const browserProducts = browserCache?.products || [];
+  if (browserProducts.length === 0) return cachedProducts;
+
+  const browserUpdatedAt = Date.parse(browserCache.updatedAt || '');
+  const staticUpdatedAt = Date.parse(cachedProductsUpdatedAt || '');
+
+  if (Number.isFinite(browserUpdatedAt) && Number.isFinite(staticUpdatedAt)) {
+    return browserUpdatedAt > staticUpdatedAt ? browserProducts : cachedProducts;
+  }
+
+  return browserProducts;
 }
 
 async function getCachedProductData(filter, warning, error, fallbackData = []) {
