@@ -701,12 +701,14 @@ export const cachedProducts = [
     "category": "Wigs",
     "price": 100,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171861/jts_beauty/products/xlzvxahnb8uc12d5ch5k.png",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229537/jts-beauty/products/wap8lfx6w98fkfgcjjj2.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171862/jts_beauty/products/jcv37zodpxahi7hqr1zy.png",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171237/jts_beauty/products/ujiccxzdsjo67sd4fwhj.jpg",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171238/jts_beauty/products/igok0djh47ox2ab7wljf.jpg",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171239/jts_beauty/products/uvwymjsnagbh0h9yepvp.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229537/jts-beauty/products/wap8lfx6w98fkfgcjjj2.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229537/jts-beauty/products/antxp2izkwlzxsonvfyz.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229537/jts-beauty/products/dkfiloo2wk5rscd3r6gb.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229652/jts-beauty/products/uezlt5mjildkzaio2bni.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229653/jts-beauty/products/ljufox4zk7dmxt24ogd7.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229655/jts-beauty/products/t4ikll4vexm61o35lcfi.jpg"
     ],
     "isFeatured": false,
     "variants": [
@@ -716,7 +718,7 @@ export const cachedProducts = [
         "price": 100,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d7c"
+        "_id": "6a1c261788a94faac51c7fd8"
       },
       {
         "length": "12",
@@ -724,7 +726,7 @@ export const cachedProducts = [
         "price": 110,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d7d"
+        "_id": "6a1c261788a94faac51c7fd9"
       },
       {
         "length": "14",
@@ -732,7 +734,7 @@ export const cachedProducts = [
         "price": 115,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d7e"
+        "_id": "6a1c261788a94faac51c7fda"
       },
       {
         "length": "16",
@@ -740,7 +742,7 @@ export const cachedProducts = [
         "price": 120,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d7f"
+        "_id": "6a1c261788a94faac51c7fdb"
       },
       {
         "length": "18",
@@ -748,7 +750,7 @@ export const cachedProducts = [
         "price": 125,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d80"
+        "_id": "6a1c261788a94faac51c7fdc"
       },
       {
         "length": "20",
@@ -756,7 +758,7 @@ export const cachedProducts = [
         "price": 145,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d81"
+        "_id": "6a1c261788a94faac51c7fdd"
       },
       {
         "length": "22",
@@ -764,7 +766,7 @@ export const cachedProducts = [
         "price": 185,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d82"
+        "_id": "6a1c261788a94faac51c7fde"
       },
       {
         "length": "24",
@@ -772,7 +774,7 @@ export const cachedProducts = [
         "price": 225,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d83"
+        "_id": "6a1c261788a94faac51c7fdf"
       },
       {
         "length": "26",
@@ -780,7 +782,7 @@ export const cachedProducts = [
         "price": 265,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d84"
+        "_id": "6a1c261788a94faac51c7fe0"
       },
       {
         "length": "28",
@@ -788,7 +790,7 @@ export const cachedProducts = [
         "price": 305,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d85"
+        "_id": "6a1c261788a94faac51c7fe1"
       },
       {
         "length": "30",
@@ -796,7 +798,7 @@ export const cachedProducts = [
         "price": 365,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d86"
+        "_id": "6a1c261788a94faac51c7fe2"
       },
       {
         "length": "32",
@@ -804,7 +806,7 @@ export const cachedProducts = [
         "price": 420,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d87"
+        "_id": "6a1c261788a94faac51c7fe3"
       },
       {
         "length": "34",
@@ -812,7 +814,7 @@ export const cachedProducts = [
         "price": 500,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d88"
+        "_id": "6a1c261788a94faac51c7fe4"
       },
       {
         "length": "36",
@@ -820,7 +822,7 @@ export const cachedProducts = [
         "price": 520,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d89"
+        "_id": "6a1c261788a94faac51c7fe5"
       },
       {
         "length": "38",
@@ -828,7 +830,7 @@ export const cachedProducts = [
         "price": 570,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d8a"
+        "_id": "6a1c261788a94faac51c7fe6"
       },
       {
         "length": "40",
@@ -836,11 +838,11 @@ export const cachedProducts = [
         "price": 680,
         "stock": 100,
         "sku": "",
-        "_id": "6a19420bb287eae5845b7d8b"
+        "_id": "6a1c261788a94faac51c7fe7"
       }
     ],
     "createdAt": "2026-05-26T21:29:05.379Z",
-    "updatedAt": "2026-05-30T20:11:02.798Z",
+    "updatedAt": "2026-05-31T12:14:15.019Z",
     "__v": 1
   },
   {
@@ -1101,14 +1103,14 @@ export const cachedProducts = [
     "category": "Lace Glues",
     "price": 20,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171846/jts_beauty/products/zxtei90878imi8uzooxv.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229706/jts-beauty/products/efoxvgflgn6yvcou8m4p.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171847/jts_beauty/products/s0nvbmjugnmbzuctutfc.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780229706/jts-beauty/products/efoxvgflgn6yvcou8m4p.jpg"
     ],
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-05-26T21:04:33.778Z",
-    "updatedAt": "2026-05-30T20:10:47.638Z",
+    "updatedAt": "2026-05-31T12:15:06.729Z",
     "__v": 1
   },
   {
@@ -1878,4 +1880,4 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:33.919Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-05-31T12:09:02.146Z";
+export const cachedProductsUpdatedAt = "2026-05-31T12:17:28.095Z";
