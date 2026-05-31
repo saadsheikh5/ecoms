@@ -1880,4 +1880,4 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:33.919Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-05-31T12:17:28.095Z";
+export const cachedProductsUpdatedAt = "2026-05-31T12:20:11.930Z";
