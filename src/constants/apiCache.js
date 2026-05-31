@@ -6,10 +6,10 @@ export const cachedProducts = [
     "category": "Wigs",
     "price": 85,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171246/jts_beauty/products/qgxp04norugr3a06qbfa.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171248/jts_beauty/products/ywce2xyw5mtgjpq51sh9.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171247/jts_beauty/products/yuaptozj8rjjji3fzypu.jpg",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171248/jts_beauty/products/ywce2xyw5mtgjpq51sh9.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171248/jts_beauty/products/ywce2xyw5mtgjpq51sh9.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780226676/jts-beauty/products/doipib6tipyzej4ynwny.jpg"
     ],
     "isFeatured": true,
     "variants": [
@@ -47,7 +47,7 @@ export const cachedProducts = [
       }
     ],
     "createdAt": "2026-05-30T17:38:32.132Z",
-    "updatedAt": "2026-05-30T20:00:48.722Z",
+    "updatedAt": "2026-05-31T11:26:31.601Z",
     "__v": 0
   },
   {
@@ -1007,37 +1007,20 @@ export const cachedProducts = [
     "__v": 1
   },
   {
-    "_id": "6a160bc764e24a66a37d3015",
-    "title": "Lace bond glue",
-    "description": "",
-    "category": "Lace Glues",
-    "price": 7.5,
-    "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171855/jts_beauty/products/sun9sgan2ozk5wddsrdw.jpg",
-    "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171856/jts_beauty/products/uas9gjb2s5qoi49jmue4.jpg"
-    ],
-    "isFeatured": false,
-    "variants": [],
-    "createdAt": "2026-05-26T21:08:23.424Z",
-    "updatedAt": "2026-05-30T20:10:57.163Z",
-    "__v": 1
-  },
-  {
     "_id": "6a160b9364e24a66a37d3012",
     "title": "kiwi scented lace glue",
     "description": "",
     "category": "Lace Glues",
     "price": 25,
-    "stock": 2,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171853/jts_beauty/products/thwskcobl6b45vfljb9t.jpg",
+    "stock": 200,
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780226862/jts-beauty/products/dnj9jpvvyxco1ugybznp.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171854/jts_beauty/products/tdlxunu3roixczwankjp.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780226862/jts-beauty/products/dnj9jpvvyxco1ugybznp.jpg"
     ],
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-05-26T21:07:31.922Z",
-    "updatedAt": "2026-05-30T20:10:55.115Z",
+    "updatedAt": "2026-05-31T11:27:42.880Z",
     "__v": 1
   },
   {
@@ -1876,4 +1859,4 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:33.919Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-05-31T11:07:14.678Z";
+export const cachedProductsUpdatedAt = "2026-05-31T11:48:11.981Z";

@@ -73,7 +73,7 @@ const writeProductCache = (products) => {
 };
 
 const updateApiCache = async () => {
-  const apiUrl = normalizeApiUrl(process.env.VITE_API_URL || productionApiUrl);
+  const apiUrl = normalizeApiUrl(process.env.API_CACHE_URL || process.env.VITE_API_URL || productionApiUrl);
   if (!apiUrl) return;
 
   try {
