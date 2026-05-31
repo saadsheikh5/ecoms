@@ -1,9 +1,11 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
 
 const root = dirname(fileURLToPath(new URL('../package.json', import.meta.url)));
+const require = createRequire(import.meta.url);
 const indexPath = join(root, 'index.html');
 const devIndexPath = join(root, 'dev.html');
 const distPath = join(root, 'dist');
@@ -43,6 +45,33 @@ const normalizeApiUrl = (url) => {
   return absoluteUrl.replace(/\/+$/, '');
 };
 
+const fetchProductsFromMongo = async () => {
+  const dotenv = require(join(root, 'server', 'node_modules', 'dotenv'));
+  const mongoose = require(join(root, 'server', 'node_modules', 'mongoose'));
+  const Product = require(join(root, 'server', 'models', 'Product'));
+
+  dotenv.config({ path: join(root, 'server', '.env') });
+
+  if (!process.env.MONGO_URI) {
+    throw new Error('MONGO_URI is not configured.');
+  }
+
+  await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 });
+  try {
+    return await Product.find({}).sort('-createdAt').lean();
+  } finally {
+    await mongoose.disconnect();
+  }
+};
+
+const writeProductCache = (products) => {
+  writeFileSync(
+    apiCachePath,
+    `export const cachedProducts = ${JSON.stringify(products, null, 2)};\nexport const cachedProductsUpdatedAt = ${JSON.stringify(new Date().toISOString())};\n`
+  );
+  console.log(`Cached ${products.length} live products for offline browsing.`);
+};
+
 const updateApiCache = async () => {
   const apiUrl = normalizeApiUrl(process.env.VITE_API_URL || productionApiUrl);
   if (!apiUrl) return;
@@ -58,13 +87,15 @@ const updateApiCache = async () => {
       throw new Error('API products payload was invalid.');
     }
 
-    writeFileSync(
-      apiCachePath,
-      `export const cachedProducts = ${JSON.stringify(payload.data, null, 2)};\nexport const cachedProductsUpdatedAt = ${JSON.stringify(new Date().toISOString())};\n`
-    );
-    console.log(`Cached ${payload.data.length} live products for offline browsing.`);
+    writeProductCache(payload.data);
   } catch (error) {
-    console.warn(`Unable to refresh live product cache. Keeping existing snapshot. ${error.message}`);
+    console.warn(`Unable to refresh live product cache from API. Trying MongoDB snapshot. ${error.message}`);
+    try {
+      const products = await fetchProductsFromMongo();
+      writeProductCache(products);
+    } catch (mongoError) {
+      console.warn(`Unable to refresh live product cache from MongoDB. Keeping existing snapshot. ${mongoError.message}`);
+    }
   }
 };
 
