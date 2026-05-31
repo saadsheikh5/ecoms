@@ -1042,19 +1042,19 @@ export const cachedProducts = [
   },
   {
     "_id": "6a160b6e64e24a66a37d300f",
-    "title": "Jts Beauty strwaberry Scented lace glue",
+    "title": "Jts Beauty Strawberry Scented lace glue",
     "description": "",
     "category": "Lace Glues",
     "price": 25,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171851/jts_beauty/products/bak0jy0dcvygdhbwndf7.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171852/jts_beauty/products/fupndbnr5zirt3rgkm2v.jpg",
     "images": [
       "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171852/jts_beauty/products/fupndbnr5zirt3rgkm2v.jpg"
     ],
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-05-26T21:06:54.853Z",
-    "updatedAt": "2026-05-30T20:10:53.067Z",
+    "updatedAt": "2026-05-31T10:04:36.469Z",
     "__v": 1
   },
   {
@@ -1064,14 +1064,15 @@ export const cachedProducts = [
     "category": "Lace Glues",
     "price": 7.5,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171849/jts_beauty/products/sge7hqpa2emltxh0skze.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780221672/jts-beauty/products/lbedmjlz3ncoimcumgpn.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171850/jts_beauty/products/dcwk1gsbh58jq1g69ndv.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780221672/jts-beauty/products/lbedmjlz3ncoimcumgpn.jpg",
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780221764/jts-beauty/products/o9ztxjvaqhhwphibc3fx.jpg"
     ],
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-05-26T21:05:40.938Z",
-    "updatedAt": "2026-05-30T20:10:51.121Z",
+    "updatedAt": "2026-05-31T10:02:44.947Z",
     "__v": 1
   },
   {
@@ -1115,18 +1116,14 @@ export const cachedProducts = [
     "category": "Hair Products",
     "price": 10,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171223/jts_beauty/products/gtzcinqiyin3qpbw2edc.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171224/jts_beauty/products/owgqrgrexna5hyvzciii.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171224/jts_beauty/products/owgqrgrexna5hyvzciii.jpg",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171225/jts_beauty/products/jdkart1nuc1wax82utux.jpg",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171226/jts_beauty/products/c4yewbavisoxkzq5d3yc.jpg",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171227/jts_beauty/products/vwc1xzgstmxz3koke8ym.jpg",
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780170759/jts-beauty/products/qc7hq4nekdy0gnxainr5.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171224/jts_beauty/products/owgqrgrexna5hyvzciii.jpg"
     ],
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-05-26T21:00:30.978Z",
-    "updatedAt": "2026-05-30T20:00:27.936Z",
+    "updatedAt": "2026-05-31T09:58:06.538Z",
     "__v": 1
   },
   {
@@ -1136,14 +1133,14 @@ export const cachedProducts = [
     "category": "Hair Products",
     "price": 8,
     "stock": 10,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171844/jts_beauty/products/zcbthkbio8n3fpdhrcfi.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780221522/jts-beauty/products/l3qupnkmollz4qnnxbny.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171845/jts_beauty/products/krvemok0npcifse68ohd.jpg"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780221522/jts-beauty/products/l3qupnkmollz4qnnxbny.jpg"
     ],
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-05-26T20:58:42.531Z",
-    "updatedAt": "2026-05-30T20:10:45.697Z",
+    "updatedAt": "2026-05-31T10:00:05.938Z",
     "__v": 1
   },
   {
@@ -1879,4 +1876,4 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:33.919Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-05-30T20:31:30.960Z";
+export const cachedProductsUpdatedAt = "2026-05-31T10:07:43.593Z";
