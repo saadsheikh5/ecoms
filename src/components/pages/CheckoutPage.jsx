@@ -29,22 +29,9 @@ export default function CheckoutPage({
     zipCode: ''
   });
 
-  // Form States for payment information
-  const [paymentInfo, setPaymentInfo] = useState({
-    cardholderName: '',
-    cardNumber: '',
-    expiry: '',
-    cvv: ''
-  });
-
   const handleBillingChange = (e) => {
     const { name, value } = e.target;
     setBillingInfo(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handlePaymentChange = (e) => {
-    const { name, value } = e.target;
-    setPaymentInfo(prev => ({ ...prev, [name]: value }));
   };
 
   const subtotal = cartDetails.reduce((sum, item) => {
@@ -152,7 +139,6 @@ export default function CheckoutPage({
       // Connects directly to the API service layer
       const response = await placeOrder({
         billingInfo,
-        paymentInfo: paymentMethod === 'Card' ? paymentInfo : {},
         paymentMethod,
         items: cartDetails,
         amount: total,
@@ -254,7 +240,7 @@ export default function CheckoutPage({
 
           {!apiAvailable && (
             <div className="p-4 mb-6 border bg-red-50 text-red-800 border-red-200" role="alert">
-              Live checkout is temporarily unavailable. Payment fields remain visible for review, but order placement and coupon validation are disabled until the API reconnects.
+              Live checkout is temporarily unavailable. Order placement, Stripe Checkout, and coupon validation are disabled until the API reconnects.
             </div>
           )}
 
@@ -369,47 +355,9 @@ export default function CheckoutPage({
               </div>
 
               {paymentMethod === 'Card' && (
-                <>
-                  <input 
-                    name="cardholderName"
-                    value={paymentInfo.cardholderName}
-                    onChange={handlePaymentChange}
-                    placeholder="Cardholder Name" 
-                    disabled={!apiAvailable}
-                    title={!apiAvailable ? 'Payment entry is disabled while store services reconnect.' : undefined}
-                    className="w-full border border-[#D5E8D4] p-4 outline-none focus:border-[#d9006c] disabled:bg-[#D5E8D4] disabled:opacity-60 disabled:cursor-not-allowed" 
-                  />
-                  <input 
-                    name="cardNumber"
-                    value={paymentInfo.cardNumber}
-                    onChange={handlePaymentChange}
-                    placeholder="Card Number" 
-                    disabled={!apiAvailable}
-                    title={!apiAvailable ? 'Payment entry is disabled while store services reconnect.' : undefined}
-                    className="w-full border border-[#D5E8D4] p-4 outline-none focus:border-[#d9006c] disabled:bg-[#D5E8D4] disabled:opacity-60 disabled:cursor-not-allowed" 
-                  />
-                  
-                  <div className="grid grid-cols-2 gap-5">
-                    <input 
-                      name="expiry"
-                      value={paymentInfo.expiry}
-                      onChange={handlePaymentChange}
-                      placeholder="MM/YY" 
-                      disabled={!apiAvailable}
-                      title={!apiAvailable ? 'Payment entry is disabled while store services reconnect.' : undefined}
-                      className="border border-[#D5E8D4] p-4 outline-none focus:border-[#d9006c] disabled:bg-[#D5E8D4] disabled:opacity-60 disabled:cursor-not-allowed" 
-                    />
-                    <input 
-                      name="cvv"
-                      value={paymentInfo.cvv}
-                      onChange={handlePaymentChange}
-                      placeholder="CVV" 
-                      disabled={!apiAvailable}
-                      title={!apiAvailable ? 'Payment entry is disabled while store services reconnect.' : undefined}
-                      className="border border-[#D5E8D4] p-4 outline-none focus:border-[#d9006c] disabled:bg-[#D5E8D4] disabled:opacity-60 disabled:cursor-not-allowed" 
-                    />
-                  </div>
-                </>
+                <div className="border border-[#D5E8D4] bg-[#D5E8D4] p-4 text-sm text-[#d9006c]">
+                  Card payments are processed securely through Stripe Checkout. After placing your order, you will be redirected to Stripe to enter payment details.
+                </div>
               )}
 
               {paymentMethod === 'Cash on Delivery' && (

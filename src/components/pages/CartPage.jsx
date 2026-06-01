@@ -15,6 +15,9 @@ export default function CartPage({
   const subtotal = cartDetails.reduce((sum, item) => {
     return sum + getItemPrice(item) * getItemQuantity(item);
   }, 0);
+  const shipping = subtotal > 0 ? 10.00 : 0.00;
+  const tax = subtotal * 0.08;
+  const total = subtotal + shipping + tax;
 
   return (
     <section className="min-h-screen bg-[#D5E8D4] px-4 py-8 sm:px-8">
@@ -127,9 +130,23 @@ export default function CartPage({
                 <span className="font-semibold text-[#1a1a1a]">{cart.reduce((total, item) => total + getItemQuantity(item), 0)}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-xl font-semibold">Subtotal</span>
-                <span className="text-2xl font-bold text-[#d9006c]">
+                <span className="text-gray-600">Subtotal</span>
+                <span className="font-semibold text-[#1a1a1a]">
                   ${subtotal.toFixed(2)}
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-gray-600">
+                <span>Shipping</span>
+                <span className="font-semibold text-[#1a1a1a]">${shipping.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between items-center text-gray-600">
+                <span>Estimated Tax</span>
+                <span className="font-semibold text-[#1a1a1a]">${tax.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between items-center border-t border-[#f9c0d9] pt-4">
+                <span className="text-xl font-semibold">Total</span>
+                <span className="text-2xl font-bold text-[#d9006c]">
+                  ${total.toFixed(2)}
                 </span>
               </div>
             </div>

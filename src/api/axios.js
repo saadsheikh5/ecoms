@@ -8,6 +8,8 @@ const api = axios.create({
   timeout: Number(import.meta.env.VITE_API_TIMEOUT_MS) || 10000,
   headers: {
     'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+    Pragma: 'no-cache',
   },
 });
 

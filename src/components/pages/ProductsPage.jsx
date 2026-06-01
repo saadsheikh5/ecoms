@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import MaintenanceNotice from '../common/MaintenanceNotice';
 
+const PRODUCT_TYPE_LABELS = {
+  Bonnets: 'Bonnets And Fashion/Lace Bands',
+};
+
 export default function ProductsPage({
   selectedProductType,
   setActivePage,
@@ -16,6 +20,7 @@ export default function ProductsPage({
 }) {
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const isSearching = normalizedQuery.length > 0;
+  const pageTitle = PRODUCT_TYPE_LABELS[selectedProductType] || selectedProductType;
 
   const getProductText = (product) => [
     product.title,
@@ -33,10 +38,14 @@ export default function ProductsPage({
     return products.filter((product) => getProductText(product).includes(normalizedQuery));
   };
 
+  const displayedWigs = filterProducts(productCategories.Wigs);
+  const displayedBonnets = filterProducts(productCategories.Bonnets);
   const displayedLaceTints = filterProducts(productCategories['Lace Tints']);
   const displayedLaceGlues = filterProducts(productCategories['Lace Glues']);
   const displayedHairProducts = filterProducts(productCategories['Hair Products']);
   const searchResults = [
+    ...displayedWigs,
+    ...displayedBonnets,
     ...displayedLaceTints,
     ...displayedLaceGlues,
     ...displayedHairProducts,
@@ -65,7 +74,7 @@ export default function ProductsPage({
 
   const renderProductCard = (product, key) => {
     const productName = product.title || product.name;
-    const isWig = product.category === 'Wigs' || Boolean(product.title);
+    const isWig = product.category === 'Wigs' || product.adminCategory === 'Wigs';
 
     return (
       <div
@@ -141,7 +150,7 @@ export default function ProductsPage({
                 ? resultCount > 0 ? 'Search Results' : 'No Results'
                 : selectedProductType === 'All Products'
                   ? 'All Products'
-                  : selectedProductType}
+                  : pageTitle}
             </h2>
             {isSearching && (
               <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -177,6 +186,30 @@ export default function ProductsPage({
               </div>
             )}
           </>
+        )}
+
+        {/* WIGS SECTION */}
+        {!isSearching && selectedProductType === 'Wigs' && (
+          <div id="products-wigs" className="mb-8 scroll-mt-28">
+            {selectedProductType === 'All Products' && (
+              <h3 className="text-4xl font-bold uppercase tracking-wide mb-8 text-[#1a1a1a]">Wigs</h3>
+            )}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+              {displayedWigs.map((product, index) => renderProductCard(product, `wig-${index}`))}
+            </div>
+          </div>
+        )}
+
+        {/* BONNETS SECTION */}
+        {!isSearching && selectedProductType === 'Bonnets' && (
+          <div id="products-bonnets" className="mb-8 scroll-mt-28">
+            {selectedProductType === 'All Products' && (
+              <h3 className="text-4xl font-bold uppercase tracking-wide mb-8 text-[#1a1a1a]">Bonnets And Fashion/Lace Bands</h3>
+            )}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+              {displayedBonnets.map((product, index) => renderProductCard(product, `bonnet-${index}`))}
+            </div>
+          </div>
         )}
 
         {/* LACE SECTION */}
