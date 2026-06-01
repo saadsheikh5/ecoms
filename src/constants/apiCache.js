@@ -1236,9 +1236,9 @@ export const cachedProducts = [
     "title": "JTs Wax Stick",
     "description": "Premium flyaway tamer and edge sleek wax stick.",
     "category": "Hair Products",
-    "price": 7.99,
+    "price": 8,
     "stock": 60,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171820/jts_beauty/products/jfoky2eb4d27gnfqftqm.jpg",
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171821/jts_beauty/products/r466pns77yetm0gmus53.jpg",
     "images": [
       "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171821/jts_beauty/products/r466pns77yetm0gmus53.jpg"
     ],
@@ -1246,7 +1246,7 @@ export const cachedProducts = [
     "variants": [],
     "__v": 1,
     "createdAt": "2026-05-22T05:36:40.950Z",
-    "updatedAt": "2026-05-30T20:10:21.749Z"
+    "updatedAt": "2026-06-01T00:19:49.185Z"
   },
   {
     "_id": "6a0feb6839372a67b4d81a4d",
@@ -1858,4 +1858,4 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:33.919Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-05-31T12:26:19.840Z";
+export const cachedProductsUpdatedAt = "2026-06-01T00:34:57.485Z";

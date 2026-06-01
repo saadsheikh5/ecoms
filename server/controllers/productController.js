@@ -33,11 +33,17 @@ const getUploadedImagePaths = (files) => {
 const hasUploadedImages = (files) => getUploadedImagePaths(files).length > 0;
 
 const imageRemovalAllowed = () => process.env.ALLOW_IMAGE_REMOVAL === 'true';
+const preventProductResponseCaching = (res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+};
 
 // @route   GET /api/products
 // @access  Public
 const getAllProducts = async (req, res, next) => {
   try {
+    preventProductResponseCaching(res);
     const { category, featured } = req.query;
     const filter = {};
     if (category) filter.category = category;
@@ -51,6 +57,7 @@ const getAllProducts = async (req, res, next) => {
 // @access  Public
 const getProduct = async (req, res, next) => {
   try {
+    preventProductResponseCaching(res);
     const product = await Product.findById(req.params.id || req.query.id);
     if (!product) return next(new ApiError('Product not found.', 404));
     res.status(200).json({ success: true, data: product });

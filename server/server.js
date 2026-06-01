@@ -6,12 +6,13 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
+const path = require('path');
+
+dotenv.config({ path: path.join(__dirname, '.env') });
+
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 const { handleStripeWebhook } = require('./controllers/paymentController');
-const path = require('path');
-
-dotenv.config();
 
 const app = express();
 const isProduction = process.env.NODE_ENV === 'production';

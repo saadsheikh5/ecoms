@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   wigCategories as defaultWigCategories, 
   featuredProducts as defaultFeaturedProducts, 
@@ -99,8 +99,16 @@ const loadSavedCart = () => {
   return savedCartCache;
 };
 
-function PaymentResultPage({ type, setActivePage }) {
+function PaymentResultPage({ type, setActivePage, onOrderSuccess }) {
   const isSuccess = type === 'success';
+  const didClearCart = useRef(false);
+
+  useEffect(() => {
+    if (isSuccess && !didClearCart.current) {
+      didClearCart.current = true;
+      onOrderSuccess?.({ redirect: false });
+    }
+  }, [isSuccess, onOrderSuccess]);
 
   return (
     <section className="min-h-screen bg-[#D5E8D4] px-4 py-8 sm:px-8 flex items-center">
@@ -491,7 +499,7 @@ export default function App() {
           )}
 
           {/* Bonnets and head bands section */}
-          <section className="bg-white py-8 px-4 sm:px-6 lg:px-10">
+          <section id="bonnets" className="scroll-mt-28 bg-white py-8 px-4 sm:px-6 lg:px-10">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-6">
                 <p className="uppercase tracking-[0.3em] text-sm text-[#d9006c] font-bold">
@@ -750,7 +758,11 @@ export default function App() {
       )}
 
       {activePage === 'payment-success' && (
-        <PaymentResultPage type="success" setActivePage={setActivePage} />
+        <PaymentResultPage
+          type="success"
+          setActivePage={setActivePage}
+          onOrderSuccess={handleOrderSuccess}
+        />
       )}
 
       {activePage === 'payment-cancel' && (

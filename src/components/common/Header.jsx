@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ShoppingBag, Search, Menu } from 'lucide-react';
 
 const SETTINGS_STORAGE_KEY = 'jtsAdminSettings';
@@ -27,6 +27,8 @@ export default function Header({
 }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [logoSrc, setLogoSrc] = useState(getSavedLogo);
+  const desktopSearchRef = useRef(null);
+  const mobileSearchRef = useRef(null);
 
   useEffect(() => {
     const handleSettingsUpdated = (event) => {
@@ -48,6 +50,26 @@ export default function Header({
     };
   }, []);
 
+  useEffect(() => {
+    if (!isSearchOpen) return undefined;
+
+    const handleClickAway = (event) => {
+      const target = event.target;
+      const clickedInsideDesktopSearch = desktopSearchRef.current?.contains(target);
+      const clickedInsideMobileSearch = mobileSearchRef.current?.contains(target);
+
+      if (clickedInsideDesktopSearch || clickedInsideMobileSearch) {
+        return;
+      }
+
+      setSearchQuery('');
+      setIsSearchOpen(false);
+    };
+
+    document.addEventListener('pointerdown', handleClickAway);
+    return () => document.removeEventListener('pointerdown', handleClickAway);
+  }, [isSearchOpen, setSearchQuery]);
+
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     const query = searchQuery.trim();
@@ -58,6 +80,14 @@ export default function Header({
 
     setSearchQuery(query);
     setSelectedProductType('All Products');
+    setActivePage('products');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openProductCategory = (category) => {
+    setSearchQuery('');
+    setIsSearchOpen(false);
+    setSelectedProductType(category);
     setActivePage('products');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -95,6 +125,7 @@ export default function Header({
 
         <div className="flex gap-4 items-center text-xl">
           <form
+            ref={desktopSearchRef}
             onSubmit={handleSearchSubmit}
             className={`hidden sm:flex items-center justify-end text-sm text-white transition-all duration-300 ${
               isSearchOpen
@@ -137,7 +168,10 @@ export default function Header({
           </button>
 
           <button
-            onClick={() => setActivePage('cart')}
+            onClick={() => {
+              setActivePage('cart');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             title={commerceDisabled ? 'Cart changes and checkout are temporarily unavailable.' : 'View cart'}
             className="relative"
           >
@@ -153,6 +187,7 @@ export default function Header({
       <nav className="border-t border-gray-100 bg-white text-[#1a1a1a] shadow-sm">
         {isSearchOpen && (
           <form
+            ref={mobileSearchRef}
             onSubmit={handleSearchSubmit}
             className="sm:hidden mx-4 mt-4 flex items-center gap-2 rounded-full border border-[#d9006c]/25 bg-white px-4 py-2 shadow-sm focus-within:border-[#d9006c]"
           >
@@ -175,28 +210,19 @@ export default function Header({
 
         <div className="flex gap-4 px-4 sm:px-8 py-4 text-xs sm:text-base items-center justify-around">
           <button 
-            onClick={() => {
-              setSelectedProductType('All Products');
-              setActivePage('home');
-            }}
+            onClick={() => openProductCategory('Wigs')}
             className="flex-1 hover:text-[#d9006c] transition font-bold text-center"
           >
             Wigs
           </button>
           <button 
-            onClick={() => {
-              setSelectedProductType('All Products');
-              setActivePage('home');
-            }}
+            onClick={() => openProductCategory('Bonnets')}
             className="flex-[1.7] hover:text-[#d9006c] transition font-bold text-center leading-tight"
           >
             {BONNETS_DISPLAY_LABEL}
           </button>
           <button 
-            onClick={() => {
-              setSelectedProductType('All Products');
-              setActivePage('products');
-            }}
+            onClick={() => openProductCategory('All Products')}
             className="flex-1 hover:text-[#d9006c] transition font-bold text-center"
           >
             Products

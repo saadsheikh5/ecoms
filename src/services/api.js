@@ -1,6 +1,6 @@
 import api from '../api/axios';
 import { API_ORIGIN, isMockDataAllowed } from '../api/status';
-import { cachedProducts, cachedProductsUpdatedAt } from '../constants/apiCache';
+import { cachedProducts } from '../constants/apiCache';
 import { 
   wigCategories, 
   featuredProducts, 
@@ -9,7 +9,6 @@ import {
 } from '../constants/products';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-const PRODUCT_CACHE_KEY = 'jtsBeautyLiveProductsCache:v1';
 const STATIC_IMAGE_FALLBACKS = [
   { match: /bob wig\s*-\s*dark/i, image: 'images/Dark Bob lace.jpeg' },
   { match: /bob wig\s*-\s*orange|light color bob/i, image: 'images/light bob wig.jpeg' },
@@ -75,85 +74,11 @@ async function getDevelopmentMockData(mockData, warning, error) {
   return [...mockData];
 }
 
-function readBrowserProductCache() {
-  if (typeof window === 'undefined') return [];
-  try {
-    const parsedCache = JSON.parse(window.localStorage.getItem(PRODUCT_CACHE_KEY) || 'null');
-    return Array.isArray(parsedCache?.products) ? parsedCache : null;
-  } catch {
-    return null;
-  }
-}
-
-function writeBrowserProductCache(products) {
-  if (typeof window === 'undefined' || !Array.isArray(products) || products.length === 0) return;
-  try {
-    window.localStorage.setItem(PRODUCT_CACHE_KEY, JSON.stringify({
-      products,
-      updatedAt: new Date().toISOString(),
-    }));
-  } catch (error) {
-    console.warn('Unable to save live product cache.', error);
-  }
-}
-
-function getProductCacheKey(product) {
-  return product?._id || product?.id || product?.title || product?.name;
-}
-
-function upsertBrowserProductCache(product) {
-  if (typeof window === 'undefined' || !product) return;
-  const productKey = getProductCacheKey(product);
-  if (!productKey) return;
-
-  const browserCache = readBrowserProductCache();
-  const currentProducts = browserCache?.products?.length ? browserCache.products : cachedProducts;
-  const productsByKey = new Map(currentProducts.map((item) => [getProductCacheKey(item), item]));
-
-  productsByKey.set(productKey, product);
-  writeBrowserProductCache([...productsByKey.values()].filter(Boolean));
-}
-
-function removeBrowserProductCache(productId) {
-  if (typeof window === 'undefined' || !productId) return;
-
-  const browserCache = readBrowserProductCache();
-  const currentProducts = browserCache?.products?.length ? browserCache.products : cachedProducts;
-  const nextProducts = currentProducts.filter((product) => getProductCacheKey(product) !== productId);
-  writeBrowserProductCache(nextProducts);
-}
-
-function mergeCachedProducts(products) {
-  if (!Array.isArray(products) || products.length === 0) return;
-  const currentProducts = getCachedProducts();
-  const productsById = new Map(currentProducts.map((product) => [product._id || product.id || product.title || product.name, product]));
-  products.forEach((product) => {
-    productsById.set(product._id || product.id || product.title || product.name, product);
-  });
-  writeBrowserProductCache([...productsById.values()]);
-}
-
-function getCachedProducts() {
-  const browserCache = readBrowserProductCache();
-  const browserProducts = browserCache?.products || [];
-  if (browserProducts.length === 0) return cachedProducts;
-
-  const browserUpdatedAt = Date.parse(browserCache.updatedAt || '');
-  const staticUpdatedAt = Date.parse(cachedProductsUpdatedAt || '');
-
-  if (Number.isFinite(browserUpdatedAt) && Number.isFinite(staticUpdatedAt)) {
-    return browserUpdatedAt > staticUpdatedAt ? browserProducts : cachedProducts;
-  }
-
-  return browserProducts;
-}
-
 async function getCachedProductData(filter, warning, error, fallbackData = []) {
-  const cached = getCachedProducts();
-  if (cached.length > 0) {
-    console.warn(`${warning} Cached live product data is being used.`, error);
+  if (cachedProducts.length > 0) {
+    console.warn(`${warning} Static product snapshot is being used because the API request failed.`, error);
     await delay(50);
-    return cached.filter(filter).map(normalizeProduct);
+    return cachedProducts.filter(filter).map(normalizeProduct);
   }
 
   return getDevelopmentMockData(fallbackData, warning, error);
@@ -200,7 +125,6 @@ export async function fetchWigCategories() {
   try {
     const response = await api.get('/products?category=Wigs');
     const products = readDataArray(response, 'wigs');
-    mergeCachedProducts(products);
     return products.map(normalizeProduct);
   } catch (error) {
     return getCachedProductData(
@@ -217,13 +141,11 @@ export async function fetchFeaturedProducts() {
     const response = await api.get('/products?category=Wigs&featured=true');
     const featured = readDataArray(response, 'featured products');
     if (featured.length > 0) {
-      mergeCachedProducts(featured);
       return featured.map(normalizeProduct);
     }
 
     const allWigsResponse = await api.get('/products?category=Wigs');
     const products = readDataArray(allWigsResponse, 'featured products');
-    mergeCachedProducts(products);
     return products.filter(p => p.isFeatured).map(normalizeProduct);
   } catch (error) {
     return getCachedProductData(
@@ -239,7 +161,6 @@ export async function fetchBeautyProducts() {
   try {
     const response = await api.get('/products');
     const products = readDataArray(response, 'beauty products');
-    writeBrowserProductCache(products);
     return products.filter(p => p.category !== 'Wigs').map(normalizeProduct);
   } catch (error) {
     return getCachedProductData(
@@ -255,7 +176,6 @@ export async function fetchBonnets() {
   try {
     const response = await api.get('/products?category=Bonnets');
     const products = readDataArray(response, 'bonnets');
-    mergeCachedProducts(products);
     return products.map(normalizeProduct);
   } catch (error) {
     return getCachedProductData(
@@ -291,7 +211,7 @@ export async function placeOrder(orderDetails) {
       title: item.title || item.name,
       category: item.adminCategory || item.category || '',
       image: item.image,
-      quantity: 1,
+      quantity: Number(item.quantity) || 1,
       price: parseFloat(String(item.price).replace('$', '').replace('From ', '')) || 0,
       variant: item.specs ? {
         length: item.specs.length,
@@ -440,7 +360,6 @@ export async function createAdminProduct(productData) {
     skipHealthUpdate: true,
     timeout: 30000,
   });
-  upsertBrowserProductCache(response.data.data);
   return response.data.data;
 }
 
@@ -450,7 +369,6 @@ export async function updateAdminProduct(id, productData) {
     skipHealthUpdate: true,
     timeout: 30000,
   });
-  upsertBrowserProductCache(response.data.data);
   return response.data.data;
 }
 
@@ -459,7 +377,6 @@ export async function deleteAdminProduct(id) {
     preserveAdminSessionOnAuthError: true,
     skipHealthUpdate: true,
   });
-  removeBrowserProductCache(id);
   return true;
 }
 

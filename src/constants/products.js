@@ -151,7 +151,7 @@ export const beautyProducts = [
   },
   {
     name: 'JTs Wax Stick',
-    price: '$7.99',
+    price: '$8.00',
     category: 'Hair Products',
     id: 'wax-stick',
     image: 'images/lace-glue/WAX-STICK.jpg',
@@ -176,4 +176,3 @@ export const productCategories = {
   'Hair Products': hairProducts,
   'Lace Glues': laceGlues,
 };
-
