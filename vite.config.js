@@ -4,14 +4,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/ecoms/',
+  base: '/',
   plugins: [
     react(),
     {
       name: 'serve-dev-html-for-pages-base',
       configureServer(server) {
         server.middlewares.use(async (req, res, next) => {
-          if (!['/', '/ecoms', '/ecoms/'].includes(req.url || '')) {
+          if (!['/', '/admin', '/admin/'].includes(req.url || '')) {
             return next();
           }
 

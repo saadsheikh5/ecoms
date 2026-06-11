@@ -99,7 +99,7 @@ const createRecoveryCodes = async () => {
   return { codes, hashedCodes };
 };
 
-const getClientUrl = () => process.env.CLIENT_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
+const getClientUrl = () => process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://jtsbeautyllc.com';
 
 const getResetUrl = (token) => {
   const baseUrl = process.env.PASSWORD_RESET_URL || `${getClientUrl()}/#/admin/reset-password`;

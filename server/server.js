@@ -24,8 +24,9 @@ const readPositiveInt = (value, fallback) => {
 const allowedOrigins = new Set([
   process.env.FRONTEND_URL,
   process.env.CLIENT_URL,
-  'https://saadsheikh5.github.io',
-  'https://saadsheikh5.github.io/ecoms',
+  'https://jtsbeautyllc.com',
+  'https://www.jtsbeautyllc.com',
+  'https://api.jtsbeautyllc.com',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
   'http://localhost:5173',

@@ -9,7 +9,7 @@ const TAX_RATE = 0.08;
 const SHIPPING_AMOUNT = 10;
 
 function getClientUrl() {
-  return process.env.CLIENT_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
+  return process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://jtsbeautyllc.com';
 }
 
 function requireStripeConfig() {

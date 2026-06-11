@@ -12,7 +12,9 @@ const distPath = join(root, 'dist');
 const distAssetsPath = join(distPath, 'assets');
 const rootAssetsPath = join(root, 'assets');
 const apiCachePath = join(root, 'src', 'constants', 'apiCache.js');
-const productionApiUrl = 'https://ecoms-lkswc2a9.b4a.run/api';
+// Allow API URL to be configured via environment variable
+// Defaults to production domain if not specified
+const productionApiUrl = process.env.VITE_API_URL || 'https://api.jtsbeautyllc.com/api';
 const pages404Html = `<!doctype html>
 <html lang="en">
   <head>
@@ -75,6 +77,8 @@ const writeProductCache = (products) => {
 const updateApiCache = async () => {
   const apiUrl = normalizeApiUrl(process.env.API_CACHE_URL || process.env.VITE_API_URL || productionApiUrl);
   if (!apiUrl) return;
+
+  console.log(`🔗 Configured API URL: ${apiUrl}`);
 
   try {
     const response = await fetch(`${apiUrl}/products`);

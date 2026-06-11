@@ -3,10 +3,12 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://saadsheikh5.github.io/ecoms/",
+  "homepage": "https://jtsbeautyllc.com",
   "scripts": {
     "dev": "vite",
     "build": "node scripts/build-pages.mjs",
+    "build:b4a": "cross-env VITE_API_URL=https://ecoms-lkswc2a9.b4a.run/api node scripts/build-pages.mjs",
+    "build:hosting": "node scripts/build-pages.mjs",
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist"
   },

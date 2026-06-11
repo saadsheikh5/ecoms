@@ -11,9 +11,9 @@ services:
       - key: NODE_ENV
         value: production
       - key: FRONTEND_URL
-        value: https://saadsheikh5.github.io/ecoms/
+        value: https://jtsbeautyllc.com
       - key: CLIENT_URL
-        value: https://saadsheikh5.github.io/ecoms/
+        value: https://jtsbeautyllc.com
       - key: ALLOW_ADMIN_BOOTSTRAP
         value: false
       - key: MONGO_URI
