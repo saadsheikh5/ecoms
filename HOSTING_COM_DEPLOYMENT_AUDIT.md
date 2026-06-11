@@ -236,7 +236,7 @@ VITE_API_URL=https://yourdomain.hosting.com/api
 ### For Backend (server/.env)
 ```
 # MongoDB
-MONGO_URI=mongodb+srv://msaadali004_db_user:5thapril@cluster0.w2ymfcc.mongodb.net/?appName=Cluster0
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/?appName=Cluster0
 
 # JWT
 JWT_SECRET=your_super_secret_jwt_key_change_this_in_production

@@ -69,7 +69,7 @@ copy .env.example .env
 Then open `.env` and fill in:
 ```
 PORT=5000
-MONGO_URI=mongodb+srv://msaadali004_db_user:5thapril@cluster0.w2ymfcc.mongodb.net/?appName=Cluster0
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/?appName=Cluster0
 JWT_SECRET=make_this_a_long_random_secret_string
 JWT_EXPIRE=7d
 FRONTEND_URL=http://localhost:3000
