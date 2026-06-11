@@ -244,6 +244,14 @@ If deploying backend to Hosting.com (advanced):
 
 *(See Hosting.com docs or contact support for Node.js setup)*
 
+#### Recommended: `.htaccess` for SPA routing
+
+Place the following `.htaccess` file in `public_html/ecoms/` to enable single-page-app routing and caching hints. A copy is included in the repo as `hosting-ecoms.htaccess`.
+
+```
+# Use the provided hosting-ecoms.htaccess in this repository
+```
+
 ---
 
 ### PART 4: Test Payment Flow (If Using Stripe)
