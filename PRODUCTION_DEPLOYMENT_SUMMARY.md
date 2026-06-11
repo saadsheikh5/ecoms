@@ -249,8 +249,8 @@ MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/jts-beauty-db
 JWT_SECRET=<generate-random-32-char-string>
 
 # Stripe (LIVE keys, not test)
-STRIPE_SECRET_KEY=sk_live_<key>
-STRIPE_WEBHOOK_SECRET=whsec_<key>
+STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
 
 # URLs
 FRONTEND_URL=https://jtsbeautyllc.com

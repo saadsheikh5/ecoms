@@ -99,8 +99,8 @@ FRONTEND_URL=https://yourdomain.hosting.com
 CLIENT_URL=https://yourdomain.hosting.com
 
 # Stripe (required for payments)
-STRIPE_SECRET_KEY=sk_live_xxxxx
-STRIPE_WEBHOOK_SECRET=whsec_xxxxx
+STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
 ```
 
 **Generate JWT_SECRET:**

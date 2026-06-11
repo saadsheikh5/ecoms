@@ -301,12 +301,12 @@ total = discounted + tax + shipping
 
 ```bash
 # Stripe Live Keys (production)
-STRIPE_SECRET_KEY=sk_live_xxxxxxxxxxxxx
-STRIPE_WEBHOOK_SECRET=whsec_1xxxxxxxxxxxxx
+STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
 
 # Stripe Test Keys (development)
-# STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxx
-# STRIPE_WEBHOOK_SECRET=whsec_1xxxxxxxxxxxxx
+# STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+# STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
 ```
 
 ### Get Keys From:
@@ -316,7 +316,7 @@ STRIPE_WEBHOOK_SECRET=whsec_1xxxxxxxxxxxxx
 4. Go to Webhooks section
 5. Add webhook endpoint: `https://yourdomain.hosting.com/api/payment/webhook`
 6. Select event: `checkout.session.completed`
-7. Copy **Signing Secret** (starts with `whsec_`)
+7. Copy **Signing Secret** (starts with `<stripe_webhook_prefix>`)
 
 ---
 

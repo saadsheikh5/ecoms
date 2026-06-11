@@ -6,4 +6,4 @@ if (!stripeSecretKey) {
   console.warn('STRIPE_SECRET_KEY is not configured. Stripe checkout endpoints will fail until it is set.');
 }
 
-module.exports = Stripe(stripeSecretKey || 'sk_test_missing');
+module.exports = Stripe(stripeSecretKey || 'REDACTED_FOR_PRODUCTION');

@@ -246,8 +246,8 @@ FRONTEND_URL=https://yourdomain.hosting.com
 CLIENT_URL=https://yourdomain.hosting.com
 
 # Stripe
-STRIPE_SECRET_KEY=sk_live_...
-STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
 
 # Optional
 PORT=5000

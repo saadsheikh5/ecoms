@@ -53,7 +53,7 @@ CORS Origins:        jtsbeautyllc.com, www.jtsbeautyllc.com, api.jtsbeautyllc.co
 ## Pre-Deployment Checklist (5 Minutes)
 
 - [ ] MongoDB Atlas cluster running
-- [ ] Stripe live keys obtained (sk_live_xxx)
+- [ ] Stripe live keys obtained (REDACTED_FOR_PRODUCTION)
 - [ ] DNS records pointing to Hosting.com
 - [ ] Hosting.com Node.js enabled
 - [ ] .env file ready with all secrets
@@ -104,8 +104,8 @@ VITE_API_URL=https://api.jtsbeautyllc.com/api
 NODE_ENV=production
 MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/jts-beauty-db
 JWT_SECRET=<strong-random-32-char-string>
-STRIPE_SECRET_KEY=sk_live_xxxxx
-STRIPE_WEBHOOK_SECRET=whsec_xxxxx
+STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
 FRONTEND_URL=https://jtsbeautyllc.com
 CLIENT_URL=https://jtsbeautyllc.com
 SMTP_HOST=<smtp-server>

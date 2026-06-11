@@ -448,10 +448,10 @@ Error: Stripe is not configured on the server
 **Solution:**
 1. Get key from Stripe Dashboard
 2. Set in `server/.env`:
-   ```bash
-   STRIPE_SECRET_KEY=sk_live_xxxxx
-   STRIPE_WEBHOOK_SECRET=whsec_xxxxx
-   ```
+  ```bash
+  STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+  STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
+  ```
 3. Restart backend
 
 ### Issue 5: "Timeout" errors loading products

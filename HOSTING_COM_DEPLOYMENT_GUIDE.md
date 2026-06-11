@@ -110,8 +110,8 @@ MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/jts-beauty-db?
 JWT_SECRET=<generate-secure-random-string>
 
 # Stripe (Live Keys)
-STRIPE_SECRET_KEY=sk_live_<your-live-key>
-STRIPE_WEBHOOK_SECRET=whsec_<your-webhook-secret>
+STRIPE_SECRET_KEY=REDACTED_FOR_PRODUCTION
+STRIPE_WEBHOOK_SECRET=REDACTED_FOR_PRODUCTION
 STRIPE_PUBLISHABLE_KEY=pk_live_<your-publishable-key>
 
 # CORS
