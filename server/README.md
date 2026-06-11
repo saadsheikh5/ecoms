@@ -62,14 +62,14 @@ By default, product updates preserve existing image references when an update ac
 Download and install MongoDB Community: https://www.mongodb.com/try/download/community
 
 ### 2. Set Up Environment Variables
-```bash
+```
 # In the server/ folder, copy the example file:
 copy .env.example .env
 ```
 Then open `.env` and fill in:
 ```
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/jtsbeauty
+MONGO_URI=mongodb+srv://msaadali004_db_user:5thapril@cluster0.w2ymfcc.mongodb.net/?appName=Cluster0
 JWT_SECRET=make_this_a_long_random_secret_string
 JWT_EXPIRE=7d
 FRONTEND_URL=http://localhost:3000
