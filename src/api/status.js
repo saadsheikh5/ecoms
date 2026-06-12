@@ -26,6 +26,7 @@ const listeners = new Set();
 let currentStatus = {
   status: isApiConfigured ? API_STATUS.CHECKING : API_STATUS.OFFLINE,
   isAvailable: false,
+  consecutiveFailures: 0,
   lastCheckedAt: null,
   error: isApiConfigured ? '' : 'Live API URL is not configured.',
 };
@@ -53,14 +54,19 @@ export function markApiAvailable() {
   setApiStatus({
     status: API_STATUS.ONLINE,
     isAvailable: true,
+    consecutiveFailures: 0,
     error: '',
   });
 }
 
 export function markApiUnavailable(error = 'The API is unavailable.') {
+  const consecutiveFailures = currentStatus.consecutiveFailures + 1;
+  const shouldShowOffline = !isApiConfigured || consecutiveFailures >= 2;
+
   setApiStatus({
-    status: API_STATUS.OFFLINE,
+    status: shouldShowOffline ? API_STATUS.OFFLINE : API_STATUS.CHECKING,
     isAvailable: false,
+    consecutiveFailures,
     error,
   });
 }
