@@ -23,7 +23,7 @@ const normalizeApiUrl = (url) => {
 };
 
 const isPlaceholderApiUrl = (url) => {
-  return !url || /example\.hosting\.com|your-backend-domain/i.test(url);
+  return !url || /example\.hosting\.com|your-backend-domain|yourdomain\.hosting\.com/i.test(url);
 };
 
 const productionApiUrl = isPlaceholderApiUrl(process.env.VITE_API_URL)
