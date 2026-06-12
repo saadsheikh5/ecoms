@@ -59,9 +59,12 @@ export function markApiAvailable() {
   });
 }
 
-export function markApiUnavailable(error = 'The API is unavailable.') {
+export function markApiUnavailable(error = 'The API is unavailable.', options = {}) {
   const consecutiveFailures = currentStatus.consecutiveFailures + 1;
-  const shouldShowOffline = !isApiConfigured || consecutiveFailures >= 2;
+  const shouldShowOffline =
+    !isApiConfigured ||
+    options.forceOffline ||
+    consecutiveFailures >= 2;
 
   setApiStatus({
     status: shouldShowOffline ? API_STATUS.OFFLINE : API_STATUS.CHECKING,

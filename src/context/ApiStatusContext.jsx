@@ -71,7 +71,7 @@ export function ApiStatusProvider({ children }) {
     const timeoutId = window.setTimeout(() => {
       const snapshot = getApiStatusSnapshot();
       if (snapshot.status === API_STATUS.CHECKING && !snapshot.isAvailable) {
-        markApiUnavailable('Server did not respond within 20 seconds.');
+        markApiUnavailable('Server did not respond within 20 seconds.', { forceOffline: true });
       }
     }, 20000);
 
