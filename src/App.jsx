@@ -428,7 +428,7 @@ export default function App() {
         commerceDisabled={commerceDisabled}
       />
 
-      {apiStatus.status === API_STATUS.OFFLINE && (
+      {apiStatus.status === API_STATUS.OFFLINE && apiStatus.canShowOffline && (
         <BrowseOnlyBanner
           mode="offline"
           onRetry={apiStatus.retry}
