@@ -14,7 +14,21 @@ const rootAssetsPath = join(root, 'assets');
 const apiCachePath = join(root, 'src', 'constants', 'apiCache.js');
 // Allow API URL to be configured via environment variable
 // Defaults to production domain if not specified
-const productionApiUrl = process.env.VITE_API_URL || 'https://api.jtsbeautyllc.com/api';
+const normalizeApiUrl = (url) => {
+  if (!url) return '';
+  const trimmedUrl = String(url).trim();
+  if (!trimmedUrl) return '';
+  const absoluteUrl = /^https?:\/\//i.test(trimmedUrl) ? trimmedUrl : `https://${trimmedUrl}`;
+  return absoluteUrl.replace(/\/+$/, '');
+};
+
+const isPlaceholderApiUrl = (url) => {
+  return !url || /example\.hosting\.com|your-backend-domain/i.test(url);
+};
+
+const productionApiUrl = isPlaceholderApiUrl(process.env.VITE_API_URL)
+  ? 'https://api.jtsbeautyllc.com/api'
+  : normalizeApiUrl(process.env.VITE_API_URL);
 const pages404Html = `<!doctype html>
 <html lang="en">
   <head>
@@ -38,14 +52,6 @@ const pages404Html = `<!doctype html>
 
 const sourceIndex = readFileSync(devIndexPath, 'utf8');
 const originalIndex = existsSync(indexPath) ? readFileSync(indexPath, 'utf8') : '';
-
-const normalizeApiUrl = (url) => {
-  if (!url) return '';
-  const trimmedUrl = String(url).trim();
-  if (!trimmedUrl) return '';
-  const absoluteUrl = /^https?:\/\//i.test(trimmedUrl) ? trimmedUrl : `https://${trimmedUrl}`;
-  return absoluteUrl.replace(/\/+$/, '');
-};
 
 const fetchProductsFromMongo = async () => {
   const dotenv = require(join(root, 'server', 'node_modules', 'dotenv'));
@@ -74,8 +80,18 @@ const writeProductCache = (products) => {
   console.log(`Cached ${products.length} live products for offline browsing.`);
 };
 
+const resolveBuildApiUrl = () => {
+  const rawUrl = process.env.API_CACHE_URL || process.env.VITE_API_URL;
+  const normalizedUrl = normalizeApiUrl(rawUrl);
+  if (isPlaceholderApiUrl(normalizedUrl)) {
+    console.warn(`Using production API URL because build environment provided a placeholder API URL.`);
+    return productionApiUrl;
+  }
+  return normalizedUrl || productionApiUrl;
+};
+
 const updateApiCache = async () => {
-  const apiUrl = normalizeApiUrl(process.env.API_CACHE_URL || process.env.VITE_API_URL || productionApiUrl);
+  const apiUrl = resolveBuildApiUrl();
   if (!apiUrl) return;
 
   console.log(`🔗 Configured API URL: ${apiUrl}`);
