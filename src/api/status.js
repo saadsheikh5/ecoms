@@ -24,8 +24,8 @@ export const isApiConfigured = Boolean(API_BASE_URL);
 const listeners = new Set();
 
 let currentStatus = {
-  status: isApiConfigured ? API_STATUS.ONLINE : API_STATUS.OFFLINE,
-  isAvailable: isApiConfigured,
+  status: isApiConfigured ? API_STATUS.CHECKING : API_STATUS.OFFLINE,
+  isAvailable: false,
   lastCheckedAt: null,
   error: isApiConfigured ? '' : 'Live API URL is not configured.',
 };
