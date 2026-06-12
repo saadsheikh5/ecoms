@@ -13,7 +13,7 @@ import {
   fetchBonnets,
   fetchHomepageReviews
 } from './services/api';
-import { isMockDataAllowed } from './api/status';
+import { isMockDataAllowed, API_STATUS } from './api/status';
 import { useApiStatus } from './context/ApiStatusContext';
 import { Facebook, Instagram, MessageCircle } from 'lucide-react';
 
@@ -428,9 +428,9 @@ export default function App() {
         commerceDisabled={commerceDisabled}
       />
 
-      {(browseOnlyMode || apiStatus.isChecking) && (
+      {apiStatus.status === API_STATUS.OFFLINE && (
         <BrowseOnlyBanner
-          mode={apiStatus.isChecking ? 'checking' : 'offline'}
+          mode="offline"
           onRetry={apiStatus.retry}
           isChecking={apiStatus.isChecking}
         />
