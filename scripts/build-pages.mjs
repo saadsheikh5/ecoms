@@ -125,6 +125,10 @@ try {
   execFileSync(process.execPath, [join(root, 'node_modules', 'vite', 'bin', 'vite.js'), 'build'], {
     cwd: root,
     stdio: 'inherit',
+    env: {
+      ...process.env,
+      VITE_API_URL: productionApiUrl,
+    },
   });
 
   const distIndexPath = join(distPath, 'index.html');
