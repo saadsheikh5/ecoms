@@ -37,12 +37,12 @@ const pages404Html = `<!doctype html>
     <title>JTS Beauty World - Luxury Wigs</title>
     <script>
       (function () {
-        var basePath = '/ecoms';
+        var basePath = '';
         var path = window.location.pathname || '';
         var route = path.indexOf(basePath) === 0 ? path.slice(basePath.length) : path;
         route = route.replace(/^\\/+/, '');
         var hashRoute = route ? '#/' + route + window.location.search : window.location.hash || '#/';
-        window.location.replace(basePath + '/' + hashRoute);
+        window.location.replace('/' + hashRoute);
       }());
     </script>
   </head>

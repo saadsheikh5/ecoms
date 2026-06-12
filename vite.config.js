@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/ecoms/',
+  base: '/',
   plugins: [
     react(),
     {
@@ -16,7 +16,7 @@ export default defineConfig({
           }
 
           const html = readFileSync(resolve(process.cwd(), 'dev.html'), 'utf8')
-            .replaceAll('%BASE_URL%', '/ecoms/');
+            .replaceAll('%BASE_URL%', '/');
           const transformedHtml = await server.transformIndexHtml('/dev.html', html);
           res.statusCode = 200;
           res.setHeader('Content-Type', 'text/html');
