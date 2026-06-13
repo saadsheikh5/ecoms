@@ -56,7 +56,7 @@ export function ApiStatusProvider({ children }) {
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       setCanShowOffline(true);
-    }, 20000);
+    }, 30000);
 
     return () => {
       window.clearTimeout(timeoutId);
@@ -71,9 +71,9 @@ export function ApiStatusProvider({ children }) {
     const timeoutId = window.setTimeout(() => {
       const snapshot = getApiStatusSnapshot();
       if (snapshot.status === API_STATUS.CHECKING && !snapshot.isAvailable) {
-        markApiUnavailable('Server did not respond within 20 seconds.', { forceOffline: true });
+        markApiUnavailable('Server did not respond within 30 seconds.', { forceOffline: true });
       }
-    }, 20000);
+    }, 30000);
 
     return () => {
       window.clearTimeout(timeoutId);

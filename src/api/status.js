@@ -63,8 +63,7 @@ export function markApiUnavailable(error = 'The API is unavailable.', options = 
   const consecutiveFailures = currentStatus.consecutiveFailures + 1;
   const shouldShowOffline =
     !isApiConfigured ||
-    options.forceOffline ||
-    consecutiveFailures >= 2;
+    options.forceOffline;
 
   setApiStatus({
     status: shouldShowOffline ? API_STATUS.OFFLINE : API_STATUS.CHECKING,
