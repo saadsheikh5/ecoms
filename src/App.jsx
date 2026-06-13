@@ -140,7 +140,7 @@ export default function App() {
   const apiStatus = useApiStatus();
   const [catalogSource, setCatalogSource] = useState('static');
   const liveCommerceReady = apiStatus.isAvailable && catalogSource === 'live';
-  const browseOnlyMode = apiStatus.status === API_STATUS.OFFLINE;
+  const browseOnlyMode = apiStatus.status === API_STATUS.OFFLINE && apiStatus.canShowOffline;
   const commerceDisabled = browseOnlyMode;
   // Global State
   const savedCart = loadSavedCart();

@@ -54,6 +54,11 @@ export function ApiStatusProvider({ children }) {
   }, []);
 
   useEffect(() => {
+    if (apiStatus.status !== API_STATUS.OFFLINE) {
+      setCanShowOffline(false);
+      return undefined;
+    }
+
     const timeoutId = window.setTimeout(() => {
       setCanShowOffline(true);
     }, 30000);
@@ -61,7 +66,7 @@ export function ApiStatusProvider({ children }) {
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, []);
+  }, [apiStatus.status]);
 
   useEffect(() => {
     if (!isApiConfigured || apiStatus.status !== API_STATUS.CHECKING) {
