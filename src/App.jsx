@@ -151,6 +151,7 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cart, setCart] = useState(savedCart);
   const [cartDetails, setCartDetails] = useState(savedCart);
+  const [shippingMethod, setShippingMethod] = useState('Ground');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [productSectionTarget, setProductSectionTarget] = useState('');
   const [isNavVisible, setIsNavVisible] = useState(true);
@@ -717,6 +718,8 @@ export default function App() {
           setActivePage={setActivePage}
           commerceDisabled={commerceDisabled}
           apiStatus={apiStatus}
+          shippingMethod={shippingMethod}
+          setShippingMethod={setShippingMethod}
         />
       )}
 
@@ -754,6 +757,8 @@ export default function App() {
           onOrderSuccess={handleOrderSuccess}
           apiAvailable={apiStatus.isAvailable}
           apiStatus={apiStatus}
+          shippingMethod={shippingMethod}
+          setShippingMethod={setShippingMethod}
         />
       )}
 

@@ -200,6 +200,8 @@ export default function AdminOrders({ orders, setOrders, categories = [] }) {
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <p className="text-gray-500">Method:</p>
                   <p className="font-semibold">{viewingOrder.paymentMethod || 'N/A'}</p>
+                  <p className="text-gray-500">Shipping:</p>
+                  <p className="font-semibold">{viewingOrder.shippingMethod || 'Ground'} (${Number(viewingOrder.shipping || 0).toFixed(2)})</p>
                   <p className="text-gray-500">Total Paid:</p>
                   <p className="font-bold text-[#d9006c] text-lg">
                     {typeof viewingOrder.total === 'number' ? `$${viewingOrder.total.toFixed(2)}` : viewingOrder.total}

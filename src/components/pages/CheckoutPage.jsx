@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { createStripeCheckoutSession, placeOrder, validateCoupon } from '../../services/api';
+import { SHIPPING_METHODS, calculateShippingCost } from '../../utils/shipping';
 
 export default function CheckoutPage({
   cartDetails,
   setActivePage,
   onOrderSuccess,
-  apiAvailable = true
+  apiAvailable = true,
+  shippingMethod,
+  setShippingMethod
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState(null);
@@ -42,9 +45,8 @@ export default function CheckoutPage({
   
   const discount = Math.min(appliedCoupon?.discount || 0, subtotal);
   const discountedSubtotal = Math.max(subtotal - discount, 0);
-  const shipping = subtotal > 0 ? 10.00 : 0.00;
-  const tax = discountedSubtotal * 0.08;
-  const total = discountedSubtotal + shipping + tax;
+  const shipping = subtotal > 0 ? calculateShippingCost(shippingMethod, subtotal) : 0;
+  const total = discountedSubtotal + shipping;
 
   const handleApplyCoupon = async () => {
     if (!apiAvailable) {
@@ -129,6 +131,7 @@ export default function CheckoutPage({
           billingInfo,
           items: cartDetails,
           couponCode: appliedCoupon?.code || '',
+          shippingMethod,
           apiAvailable
         });
 
@@ -145,7 +148,8 @@ export default function CheckoutPage({
         subtotal,
         discount,
         shipping,
-        tax,
+        tax: 0,
+        shippingMethod,
         couponCode: appliedCoupon?.code || '',
         apiAvailable
       });
@@ -457,14 +461,38 @@ export default function CheckoutPage({
                 </div>
               )}
 
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600">Shipping</span>
-                <span className="font-semibold">${shipping.toFixed(2)}</span>
+              <div className="border border-[#D5E8D4] bg-[#f8fcf7] px-3 py-3 mb-3">
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Shipping Method</p>
+                <div className="space-y-2">
+                  {SHIPPING_METHODS.map((method) => (
+                    <label
+                      key={method.name}
+                      className={`flex items-center justify-between gap-3 border px-3 py-2 cursor-pointer transition-all duration-300 ${
+                        shippingMethod === method.name
+                          ? 'border-[#d9006c] bg-[#D5E8D4]'
+                          : 'border-[#D5E8D4] bg-white hover:border-[#d9006c]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="shippingMethod"
+                          value={method.name}
+                          checked={shippingMethod === method.name}
+                          onChange={() => setShippingMethod(method.name)}
+                          className="h-4 w-4 accent-[#d9006c]"
+                        />
+                        <span className="font-semibold text-sm text-[#1a1a1a]">{method.name}</span>
+                      </div>
+                      <span className="text-sm text-gray-600">${method.price.toFixed(2)}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Tax</span>
-                <span className="font-semibold">${tax.toFixed(2)}</span>
+                <span className="text-gray-600">Shipping ({shippingMethod})</span>
+                <span className="font-semibold">${shipping.toFixed(2)}</span>
               </div>
 
               <div className="flex justify-between items-center bg-[#D5E8D4] p-3 mt-4">

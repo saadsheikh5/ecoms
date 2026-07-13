@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Minus, Plus, ShoppingBag, X } from 'lucide-react';
+import { SHIPPING_METHODS, calculateShippingCost } from '../../utils/shipping';
 
 export default function CartPage({
   cart,
@@ -8,16 +9,17 @@ export default function CartPage({
   handleUpdateCartQuantity,
   setActivePage,
   commerceDisabled = false,
-  apiStatus
+  apiStatus,
+  shippingMethod,
+  setShippingMethod
 }) {
   const getItemPrice = (item) => parseFloat(String(item.price).replace('$', '').replace('From ', '')) || 0;
   const getItemQuantity = (item) => Math.max(1, Number(item.quantity) || 1);
   const subtotal = cartDetails.reduce((sum, item) => {
     return sum + getItemPrice(item) * getItemQuantity(item);
   }, 0);
-  const shipping = subtotal > 0 ? 10.00 : 0.00;
-  const tax = subtotal * 0.08;
-  const total = subtotal + shipping + tax;
+  const shipping = subtotal > 0 ? calculateShippingCost(shippingMethod, subtotal) : 0;
+  const total = subtotal + shipping;
 
   return (
     <section className="min-h-screen bg-[#D5E8D4] px-4 py-8 sm:px-8">
@@ -135,13 +137,37 @@ export default function CartPage({
                   ${subtotal.toFixed(2)}
                 </span>
               </div>
-              <div className="flex justify-between items-center text-gray-600">
-                <span>Shipping</span>
-                <span className="font-semibold text-[#1a1a1a]">${shipping.toFixed(2)}</span>
+              <div className="border border-[#f9c0d9] bg-[#fff8fb] px-3 py-3 mb-3">
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Shipping Method</p>
+                <div className="space-y-2">
+                  {SHIPPING_METHODS.map((method) => (
+                    <label
+                      key={method.name}
+                      className={`flex items-center justify-between gap-3 border px-3 py-2 cursor-pointer transition-all duration-300 ${
+                        shippingMethod === method.name
+                          ? 'border-[#d9006c] bg-[#D5E8D4]'
+                          : 'border-[#f9c0d9] bg-white hover:border-[#d9006c]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="cartShippingMethod"
+                          value={method.name}
+                          checked={shippingMethod === method.name}
+                          onChange={() => setShippingMethod(method.name)}
+                          className="h-4 w-4 accent-[#d9006c]"
+                        />
+                        <span className="font-semibold text-sm text-[#1a1a1a]">{method.name}</span>
+                      </div>
+                      <span className="text-sm text-gray-600">${method.price.toFixed(2)}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
               <div className="flex justify-between items-center text-gray-600">
-                <span>Estimated Tax</span>
-                <span className="font-semibold text-[#1a1a1a]">${tax.toFixed(2)}</span>
+                <span>Shipping ({shippingMethod})</span>
+                <span className="font-semibold text-[#1a1a1a]">${shipping.toFixed(2)}</span>
               </div>
               <div className="flex justify-between items-center border-t border-[#f9c0d9] pt-4">
                 <span className="text-xl font-semibold">Total</span>

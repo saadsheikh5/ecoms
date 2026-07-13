@@ -268,7 +268,7 @@ export const cachedProducts = [
         "price": 100,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a898"
+        "_id": "6a53e8669d3538bb16103f34"
       },
       {
         "length": "10",
@@ -276,7 +276,7 @@ export const cachedProducts = [
         "price": 95,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a899"
+        "_id": "6a53e8669d3538bb16103f35"
       },
       {
         "length": "10",
@@ -284,7 +284,7 @@ export const cachedProducts = [
         "price": 85,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a89a"
+        "_id": "6a53e8669d3538bb16103f36"
       },
       {
         "length": "10",
@@ -292,15 +292,15 @@ export const cachedProducts = [
         "price": 90,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a89b"
+        "_id": "6a53e8669d3538bb16103f37"
       },
       {
         "length": "12",
         "density": "250",
-        "price": 110,
+        "price": 100,
         "stock": 49,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a89c"
+        "_id": "6a53e8669d3538bb16103f38"
       },
       {
         "length": "12",
@@ -308,7 +308,7 @@ export const cachedProducts = [
         "price": 105,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a89d"
+        "_id": "6a53e8669d3538bb16103f39"
       },
       {
         "length": "12",
@@ -316,7 +316,7 @@ export const cachedProducts = [
         "price": 95,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a89e"
+        "_id": "6a53e8669d3538bb16103f3a"
       },
       {
         "length": "12",
@@ -324,15 +324,15 @@ export const cachedProducts = [
         "price": 100,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a89f"
+        "_id": "6a53e8669d3538bb16103f3b"
       },
       {
         "length": "14",
         "density": "250",
-        "price": 115,
+        "price": 110,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a0"
+        "_id": "6a53e8669d3538bb16103f3c"
       },
       {
         "length": "14",
@@ -340,7 +340,7 @@ export const cachedProducts = [
         "price": 110,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a1"
+        "_id": "6a53e8669d3538bb16103f3d"
       },
       {
         "length": "14",
@@ -348,7 +348,7 @@ export const cachedProducts = [
         "price": 105,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a2"
+        "_id": "6a53e8669d3538bb16103f3e"
       },
       {
         "length": "14",
@@ -356,15 +356,15 @@ export const cachedProducts = [
         "price": 110,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a3"
+        "_id": "6a53e8669d3538bb16103f3f"
       },
       {
         "length": "16",
         "density": "250",
-        "price": 120,
+        "price": 115,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a4"
+        "_id": "6a53e8669d3538bb16103f40"
       },
       {
         "length": "16",
@@ -372,7 +372,7 @@ export const cachedProducts = [
         "price": 330,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a5"
+        "_id": "6a53e8669d3538bb16103f41"
       },
       {
         "length": "16",
@@ -380,7 +380,7 @@ export const cachedProducts = [
         "price": 320,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a6"
+        "_id": "6a53e8669d3538bb16103f42"
       },
       {
         "length": "16",
@@ -388,15 +388,15 @@ export const cachedProducts = [
         "price": 225,
         "stock": 101,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a7"
+        "_id": "6a53e8669d3538bb16103f43"
       },
       {
         "length": "18",
         "density": "250",
-        "price": 125,
+        "price": 220,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a8"
+        "_id": "6a53e8669d3538bb16103f44"
       },
       {
         "length": "18",
@@ -404,7 +404,7 @@ export const cachedProducts = [
         "price": 350,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8a9"
+        "_id": "6a53e8669d3538bb16103f45"
       },
       {
         "length": "18",
@@ -412,7 +412,7 @@ export const cachedProducts = [
         "price": 340,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8aa"
+        "_id": "6a53e8669d3538bb16103f46"
       },
       {
         "length": "18",
@@ -420,15 +420,15 @@ export const cachedProducts = [
         "price": 240,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8ab"
+        "_id": "6a53e8669d3538bb16103f47"
       },
       {
         "length": "20",
         "density": "250",
-        "price": 145,
+        "price": 280,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8ac"
+        "_id": "6a53e8669d3538bb16103f48"
       },
       {
         "length": "20",
@@ -436,7 +436,7 @@ export const cachedProducts = [
         "price": 400,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8ad"
+        "_id": "6a53e8669d3538bb16103f49"
       },
       {
         "length": "20",
@@ -444,23 +444,23 @@ export const cachedProducts = [
         "price": 380,
         "stock": 99,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8ae"
+        "_id": "6a53e8669d3538bb16103f4a"
       },
       {
         "length": "20",
         "density": "200",
-        "price": 259.99,
+        "price": 260,
         "stock": 101,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8af"
+        "_id": "6a53e8669d3538bb16103f4b"
       },
       {
         "length": "22",
         "density": "250",
-        "price": 185,
+        "price": 300,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b0"
+        "_id": "6a53e8669d3538bb16103f4c"
       },
       {
         "length": "22",
@@ -468,7 +468,7 @@ export const cachedProducts = [
         "price": 450,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b1"
+        "_id": "6a53e8669d3538bb16103f4d"
       },
       {
         "length": "22",
@@ -476,7 +476,7 @@ export const cachedProducts = [
         "price": 465,
         "stock": 99,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b2"
+        "_id": "6a53e8669d3538bb16103f4e"
       },
       {
         "length": "22",
@@ -484,15 +484,15 @@ export const cachedProducts = [
         "price": 285,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b3"
+        "_id": "6a53e8669d3538bb16103f4f"
       },
       {
         "length": "24",
         "density": "250",
-        "price": 225,
+        "price": 315,
         "stock": 49,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b4"
+        "_id": "6a53e8669d3538bb16103f50"
       },
       {
         "length": "24",
@@ -500,7 +500,7 @@ export const cachedProducts = [
         "price": 480,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b5"
+        "_id": "6a53e8669d3538bb16103f51"
       },
       {
         "length": "24",
@@ -508,7 +508,7 @@ export const cachedProducts = [
         "price": 470,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b6"
+        "_id": "6a53e8669d3538bb16103f52"
       },
       {
         "length": "24",
@@ -516,15 +516,15 @@ export const cachedProducts = [
         "price": 350,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b7"
+        "_id": "6a53e8669d3538bb16103f53"
       },
       {
         "length": "26",
         "density": "250",
-        "price": 265,
+        "price": 355,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b8"
+        "_id": "6a53e8669d3538bb16103f54"
       },
       {
         "length": "26",
@@ -532,7 +532,7 @@ export const cachedProducts = [
         "price": 495,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8b9"
+        "_id": "6a53e8669d3538bb16103f55"
       },
       {
         "length": "26",
@@ -540,7 +540,7 @@ export const cachedProducts = [
         "price": 480,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8ba"
+        "_id": "6a53e8669d3538bb16103f56"
       },
       {
         "length": "26",
@@ -548,15 +548,15 @@ export const cachedProducts = [
         "price": 500,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8bb"
+        "_id": "6a53e8669d3538bb16103f57"
       },
       {
         "length": "28",
         "density": "250",
-        "price": 305,
+        "price": 410,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8bc"
+        "_id": "6a53e8669d3538bb16103f58"
       },
       {
         "length": "28",
@@ -564,7 +564,7 @@ export const cachedProducts = [
         "price": 500,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8bd"
+        "_id": "6a53e8669d3538bb16103f59"
       },
       {
         "length": "28",
@@ -572,7 +572,7 @@ export const cachedProducts = [
         "price": 490,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8be"
+        "_id": "6a53e8669d3538bb16103f5a"
       },
       {
         "length": "28",
@@ -580,15 +580,15 @@ export const cachedProducts = [
         "price": 530,
         "stock": 101,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8bf"
+        "_id": "6a53e8669d3538bb16103f5b"
       },
       {
         "length": "30",
         "density": "250",
-        "price": 365,
+        "price": 440,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c0"
+        "_id": "6a53e8669d3538bb16103f5c"
       },
       {
         "length": "30",
@@ -596,7 +596,7 @@ export const cachedProducts = [
         "price": 570,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c1"
+        "_id": "6a53e8669d3538bb16103f5d"
       },
       {
         "length": "30",
@@ -604,7 +604,7 @@ export const cachedProducts = [
         "price": 560,
         "stock": 99,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c2"
+        "_id": "6a53e8669d3538bb16103f5e"
       },
       {
         "length": "30",
@@ -612,15 +612,15 @@ export const cachedProducts = [
         "price": 560,
         "stock": 101,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c3"
+        "_id": "6a53e8669d3538bb16103f5f"
       },
       {
         "length": "32",
         "density": "250",
-        "price": 420,
+        "price": 480,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c4"
+        "_id": "6a53e8669d3538bb16103f60"
       },
       {
         "length": "32",
@@ -628,7 +628,7 @@ export const cachedProducts = [
         "price": 575,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c5"
+        "_id": "6a53e8669d3538bb16103f61"
       },
       {
         "length": "32",
@@ -636,7 +636,7 @@ export const cachedProducts = [
         "price": 565,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c6"
+        "_id": "6a53e8669d3538bb16103f62"
       },
       {
         "length": "32",
@@ -644,15 +644,15 @@ export const cachedProducts = [
         "price": 575,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c7"
+        "_id": "6a53e8669d3538bb16103f63"
       },
       {
         "length": "34",
         "density": "250",
-        "price": 500,
+        "price": 520,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c8"
+        "_id": "6a53e8669d3538bb16103f64"
       },
       {
         "length": "34",
@@ -660,15 +660,15 @@ export const cachedProducts = [
         "price": 585,
         "stock": 99,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8c9"
+        "_id": "6a53e8669d3538bb16103f65"
       },
       {
         "length": "34",
         "density": "220",
-        "price": 580,
+        "price": 580.01,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8ca"
+        "_id": "6a53e8669d3538bb16103f66"
       },
       {
         "length": "34",
@@ -676,15 +676,15 @@ export const cachedProducts = [
         "price": 585,
         "stock": 101,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8cb"
+        "_id": "6a53e8669d3538bb16103f67"
       },
       {
         "length": "36",
         "density": "250",
-        "price": 520,
+        "price": 580,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8cc"
+        "_id": "6a53e8669d3538bb16103f68"
       },
       {
         "length": "36",
@@ -692,7 +692,7 @@ export const cachedProducts = [
         "price": 595,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8cd"
+        "_id": "6a53e8669d3538bb16103f69"
       },
       {
         "length": "36",
@@ -700,7 +700,7 @@ export const cachedProducts = [
         "price": 590,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8ce"
+        "_id": "6a53e8669d3538bb16103f6a"
       },
       {
         "length": "36",
@@ -708,15 +708,15 @@ export const cachedProducts = [
         "price": 595,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8cf"
+        "_id": "6a53e8669d3538bb16103f6b"
       },
       {
         "length": "38",
         "density": "250",
-        "price": 570,
+        "price": 620,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d0"
+        "_id": "6a53e8669d3538bb16103f6c"
       },
       {
         "length": "38",
@@ -724,7 +724,7 @@ export const cachedProducts = [
         "price": 610,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d1"
+        "_id": "6a53e8669d3538bb16103f6d"
       },
       {
         "length": "38",
@@ -732,7 +732,7 @@ export const cachedProducts = [
         "price": 600,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d2"
+        "_id": "6a53e8669d3538bb16103f6e"
       },
       {
         "length": "38",
@@ -740,7 +740,7 @@ export const cachedProducts = [
         "price": 600,
         "stock": 101,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d3"
+        "_id": "6a53e8669d3538bb16103f6f"
       },
       {
         "length": "40",
@@ -748,7 +748,7 @@ export const cachedProducts = [
         "price": 680,
         "stock": 50,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d4"
+        "_id": "6a53e8669d3538bb16103f70"
       },
       {
         "length": "40",
@@ -756,7 +756,7 @@ export const cachedProducts = [
         "price": 650,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d5"
+        "_id": "6a53e8669d3538bb16103f71"
       },
       {
         "length": "40",
@@ -764,7 +764,7 @@ export const cachedProducts = [
         "price": 640,
         "stock": 101,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d6"
+        "_id": "6a53e8669d3538bb16103f72"
       },
       {
         "length": "40",
@@ -772,11 +772,11 @@ export const cachedProducts = [
         "price": 630,
         "stock": 100,
         "sku": "",
-        "_id": "6a2ba3a9edfe995d27e0a8d7"
+        "_id": "6a53e8669d3538bb16103f73"
       }
     ],
     "createdAt": "2026-05-26T21:46:13.225Z",
-    "updatedAt": "2026-06-12T06:14:01.875Z",
+    "updatedAt": "2026-07-12T19:17:58.601Z",
     "__v": 1
   },
   {
@@ -2959,40 +2959,6 @@ export const cachedProducts = [
     "updatedAt": "2026-05-30T20:10:31.052Z"
   },
   {
-    "_id": "6a0feb6839372a67b4d81a4c",
-    "title": "JTs Lace Tint - Medium Brown",
-    "description": "Premium lace tint spray designed for medium brown complexions.",
-    "category": "Lace Tints",
-    "price": 10,
-    "stock": 30,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171822/jts_beauty/products/d8hqvhai6bzfibn7rjbv.jpg",
-    "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171823/jts_beauty/products/upwapzuerscp1hzhlagp.jpg"
-    ],
-    "isFeatured": false,
-    "variants": [],
-    "__v": 1,
-    "createdAt": "2026-05-22T05:36:40.949Z",
-    "updatedAt": "2026-05-30T20:10:23.612Z"
-  },
-  {
-    "_id": "6a0feb6839372a67b4d81a4b",
-    "title": "JTs Lace Tint - Light Warm Brown",
-    "description": "Premium lace tint spray designed for light warm brown complexions.",
-    "category": "Lace Tints",
-    "price": 10,
-    "stock": 45,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171824/jts_beauty/products/ongtom3rpxfo4i0cevpz.jpg",
-    "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171825/jts_beauty/products/tsphsh1hx6jkaanmtc7e.jpg"
-    ],
-    "isFeatured": false,
-    "variants": [],
-    "__v": 1,
-    "createdAt": "2026-05-22T05:36:40.949Z",
-    "updatedAt": "2026-05-30T20:10:25.530Z"
-  },
-  {
     "_id": "6a0feb6839372a67b4d81a48",
     "title": "Bodywave Classic",
     "description": "Luxurious body wave wig\r\n• 13x4  \r\n• Transparent Lace",
@@ -4057,118 +4023,38 @@ export const cachedProducts = [
     "updatedAt": "2026-06-12T08:38:20.077Z"
   },
   {
-    "_id": "6a0feb6839372a67b4d81a3e",
-    "title": "Tri Color Body Wave",
-    "description": "JTs Beauty Tri Color Body Wave \n• 13x4  \n• Transparent Lace",
-    "category": "Wigs",
-    "price": 305,
-    "stock": 12,
-    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171832/jts_beauty/products/dbkmux8jde8gfdlh5enc.png",
+    "_id": "6a0feb6839372a67b4d81a4b",
+    "title": "JTs Lace Tint - Light Warm Brown",
+    "description": "Premium lace tint spray designed for light warm brown complexions.",
+    "category": "Lace Tints",
+    "price": 10,
+    "stock": 45,
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171824/jts_beauty/products/ongtom3rpxfo4i0cevpz.jpg",
     "images": [
-      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171832/jts_beauty/products/dbkmux8jde8gfdlh5enc.png"
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171825/jts_beauty/products/tsphsh1hx6jkaanmtc7e.jpg"
     ],
-    "isFeatured": true,
-    "variants": [
-      {
-        "length": "28",
-        "density": "250",
-        "price": 305,
-        "stock": 100,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e0"
-      },
-      {
-        "length": "28",
-        "density": "230",
-        "price": 500,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e1"
-      },
-      {
-        "length": "28",
-        "density": "220",
-        "price": 490,
-        "stock": 110,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e2"
-      },
-      {
-        "length": "28",
-        "density": "200",
-        "price": 530,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e3"
-      },
-      {
-        "length": "30",
-        "density": "250",
-        "price": 365,
-        "stock": 100,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e4"
-      },
-      {
-        "length": "30",
-        "density": "230",
-        "price": 570,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e5"
-      },
-      {
-        "length": "30",
-        "density": "220",
-        "price": 560,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e6"
-      },
-      {
-        "length": "30",
-        "density": "200",
-        "price": 560,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e7"
-      },
-      {
-        "length": "32",
-        "density": "250",
-        "price": 420,
-        "stock": 100,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e8"
-      },
-      {
-        "length": "32",
-        "density": "230",
-        "price": 575,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108e9"
-      },
-      {
-        "length": "32",
-        "density": "220",
-        "price": 565,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108ea"
-      },
-      {
-        "length": "32",
-        "density": "200",
-        "price": 575,
-        "stock": 111,
-        "sku": "",
-        "_id": "6a2bc697edfe995d27e108eb"
-      }
+    "isFeatured": false,
+    "variants": [],
+    "__v": 1,
+    "createdAt": "2026-05-22T05:36:40.949Z",
+    "updatedAt": "2026-05-30T20:10:25.530Z"
+  },
+  {
+    "_id": "6a0feb6839372a67b4d81a4c",
+    "title": "JTs Lace Tint - Medium Brown",
+    "description": "Premium lace tint spray designed for medium brown complexions.",
+    "category": "Lace Tints",
+    "price": 10,
+    "stock": 30,
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171822/jts_beauty/products/d8hqvhai6bzfibn7rjbv.jpg",
+    "images": [
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171823/jts_beauty/products/upwapzuerscp1hzhlagp.jpg"
     ],
-    "__v": 0,
-    "createdAt": "2026-05-22T05:36:40.948Z",
-    "updatedAt": "2026-06-12T08:43:03.474Z"
+    "isFeatured": false,
+    "variants": [],
+    "__v": 1,
+    "createdAt": "2026-05-22T05:36:40.949Z",
+    "updatedAt": "2026-05-30T20:10:23.612Z"
   },
   {
     "_id": "6a0feb6839372a67b4d81a40",
@@ -4317,6 +4203,120 @@ export const cachedProducts = [
     "__v": 1,
     "createdAt": "2026-05-22T05:36:40.948Z",
     "updatedAt": "2026-06-12T08:48:15.961Z"
+  },
+  {
+    "_id": "6a0feb6839372a67b4d81a3e",
+    "title": "Tri Color Body Wave",
+    "description": "JTs Beauty Tri Color Body Wave \n• 13x4  \n• Transparent Lace",
+    "category": "Wigs",
+    "price": 305,
+    "stock": 12,
+    "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171832/jts_beauty/products/dbkmux8jde8gfdlh5enc.png",
+    "images": [
+      "https://res.cloudinary.com/dxti8btbn/image/upload/v1780171832/jts_beauty/products/dbkmux8jde8gfdlh5enc.png"
+    ],
+    "isFeatured": true,
+    "variants": [
+      {
+        "length": "28",
+        "density": "250",
+        "price": 305,
+        "stock": 100,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e0"
+      },
+      {
+        "length": "28",
+        "density": "230",
+        "price": 500,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e1"
+      },
+      {
+        "length": "28",
+        "density": "220",
+        "price": 490,
+        "stock": 110,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e2"
+      },
+      {
+        "length": "28",
+        "density": "200",
+        "price": 530,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e3"
+      },
+      {
+        "length": "30",
+        "density": "250",
+        "price": 365,
+        "stock": 100,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e4"
+      },
+      {
+        "length": "30",
+        "density": "230",
+        "price": 570,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e5"
+      },
+      {
+        "length": "30",
+        "density": "220",
+        "price": 560,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e6"
+      },
+      {
+        "length": "30",
+        "density": "200",
+        "price": 560,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e7"
+      },
+      {
+        "length": "32",
+        "density": "250",
+        "price": 420,
+        "stock": 100,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e8"
+      },
+      {
+        "length": "32",
+        "density": "230",
+        "price": 575,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108e9"
+      },
+      {
+        "length": "32",
+        "density": "220",
+        "price": 565,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108ea"
+      },
+      {
+        "length": "32",
+        "density": "200",
+        "price": 575,
+        "stock": 111,
+        "sku": "",
+        "_id": "6a2bc697edfe995d27e108eb"
+      }
+    ],
+    "__v": 0,
+    "createdAt": "2026-05-22T05:36:40.948Z",
+    "updatedAt": "2026-06-12T08:43:03.474Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-06-13T12:37:34.882Z";
+export const cachedProductsUpdatedAt = "2026-07-12T19:22:35.799Z";

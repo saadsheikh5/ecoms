@@ -3,10 +3,9 @@ const Coupon = require('../models/Coupon');
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const stripe = require('../config/stripe');
+const { calculateShippingCost } = require('../utils/shipping');
 
 const CURRENCY = 'usd';
-const TAX_RATE = 0.08;
-const SHIPPING_AMOUNT = 10;
 
 function getClientUrl() {
   return process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://jtsbeautyllc.com';
@@ -145,19 +144,8 @@ function buildLineItems(order) {
     lineItems.push({
       price_data: {
         currency: CURRENCY,
-        product_data: { name: 'Shipping' },
+        product_data: { name: `Shipping (${order.shippingMethod || 'Ground'})` },
         unit_amount: cents(order.shipping),
-      },
-      quantity: 1,
-    });
-  }
-
-  if (order.tax > 0) {
-    lineItems.push({
-      price_data: {
-        currency: CURRENCY,
-        product_data: { name: 'Estimated tax' },
-        unit_amount: cents(order.tax),
       },
       quantity: 1,
     });
@@ -181,9 +169,9 @@ const createCheckoutSession = async (req, res, next) => {
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const { discount, couponCode } = await calculateDiscount(req.body.couponCode, subtotal);
     const discountedSubtotal = Math.max(subtotal - discount, 0);
-    const shipping = subtotal > 0 ? SHIPPING_AMOUNT : 0;
-    const tax = discountedSubtotal * TAX_RATE;
-    const total = discountedSubtotal + shipping + tax;
+    const shippingMethod = req.body.shippingMethod || 'Ground';
+    const shipping = calculateShippingCost(shippingMethod, subtotal);
+    const total = discountedSubtotal + shipping;
 
     const order = await Order.create({
       customerName,
@@ -194,7 +182,8 @@ const createCheckoutSession = async (req, res, next) => {
       subtotal,
       discount,
       shipping,
-      tax,
+      shippingMethod,
+      tax: 0,
       total,
       couponCode,
       paymentMethod: 'Stripe Checkout',
@@ -212,6 +201,7 @@ const createCheckoutSession = async (req, res, next) => {
       metadata: {
         orderId: String(order._id),
         userId: req.body.userId ? String(req.body.userId) : '',
+        shippingMethod,
       },
       success_url: `${clientUrl}/#payment-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${clientUrl}/#payment-cancel?order_id=${order._id}`,

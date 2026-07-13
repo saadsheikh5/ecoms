@@ -351,6 +351,8 @@ export default function AdminPage({ setActivePage, productCategories, onReviewsC
         total: o.total,
         status: o.orderStatus || o.status,
         paymentMethod: o.paymentMethod || 'Credit Card',
+        shipping: o.shipping || 0,
+        shippingMethod: o.shippingMethod || 'Ground',
         items: orderItems,
         createdAt: o.createdAt,
         updatedAt: o.updatedAt,

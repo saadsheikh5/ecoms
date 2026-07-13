@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Plus, Edit2, Trash2, X } from 'lucide-react';
 
 // --- Helper: Generate all length × density combinations ---
@@ -81,6 +81,10 @@ function WigVariantsSection({ variants, setVariants }) {
     [...new Set((variants || []).map((variant) => variant.density).filter(Boolean))]
   ));
 
+  // UI state for filtering and search (client-side only)
+  const [densityFilter, setDensityFilter] = useState('All Densities');
+  const [lengthSearch, setLengthSearch] = useState('');
+
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
@@ -98,9 +102,34 @@ function WigVariantsSection({ variants, setVariants }) {
     setVariants(prev => prev.map((v, i) => i === index ? { ...v, [field]: value } : v));
   };
 
+  // Keep densities list in sync when variants mutate (so filter options reflect edits)
+  useEffect(() => {
+    const next = [...new Set((variants || []).map((variant) => variant.density).filter(Boolean))];
+    setDensities(next);
+    if (densityFilter !== 'All Densities' && !next.includes(densityFilter)) {
+      setDensityFilter('All Densities');
+    }
+  }, [variants]);
+
   const deleteVariant = (index) => {
     setVariants(prev => prev.filter((_, i) => i !== index));
   };
+
+  // Build a filtered view without mutating the source `variants` array.
+  const filteredVariants = useMemo(() => {
+    if (!Array.isArray(variants)) return [];
+    const q = String(lengthSearch || '').trim();
+    return variants
+      .map((v, i) => ({ v, i }))
+      .filter(({ v }) => {
+        if (densityFilter && densityFilter !== 'All Densities' && String(v.density) !== String(densityFilter)) return false;
+        if (q) {
+          // match length substrings (e.g. "18" matches "18" or "18.0")
+          return String(v.length).toLowerCase().includes(q.toLowerCase());
+        }
+        return true;
+      });
+  }, [variants, densityFilter, lengthSearch]);
 
   return (
     <div className="mt-6 border-t border-gray-200 pt-6 space-y-5">
@@ -130,9 +159,38 @@ function WigVariantsSection({ variants, setVariants }) {
 
       {variants.length > 0 && (
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3">
-            Generated Variants ({variants.length})
-          </p>
+          <div className="flex items-center justify-between mb-3 gap-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
+              Generated Variants ({filteredVariants.length} of {variants.length})
+            </p>
+
+            <div className="flex items-center gap-3">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">Filter by Density</label>
+                <select
+                  value={densityFilter}
+                  onChange={(e) => setDensityFilter(e.target.value)}
+                  className="border border-gray-300 rounded px-2 py-1 text-sm outline-none focus:border-[#d9006c]"
+                >
+                  <option>All Densities</option>
+                  {densities.map(d => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">Search</label>
+                <input
+                  type="text"
+                  placeholder="Search length (optional)"
+                  value={lengthSearch}
+                  onChange={(e) => setLengthSearch(e.target.value)}
+                  className="border border-gray-300 rounded px-2 py-1 text-sm outline-none focus:border-[#d9006c]"
+                />
+              </div>
+            </div>
+          </div>
           <div className="overflow-hidden border border-gray-200 rounded">
             <table className="w-full table-fixed text-sm">
               <thead>
@@ -145,13 +203,13 @@ function WigVariantsSection({ variants, setVariants }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {variants.map((variant, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
+                {filteredVariants.map(({ v: variant, i: originalIndex }) => (
+                  <tr key={originalIndex} className="hover:bg-gray-50">
                     <td className="px-2 py-2">
                       <input
                         type="text" placeholder="Length"
                         value={variant.length}
-                        onChange={(e) => updateVariant(index, 'length', e.target.value)}
+                        onChange={(e) => updateVariant(originalIndex, 'length', e.target.value)}
                         className="w-full min-w-0 border border-gray-300 rounded px-2 py-1 text-sm font-semibold text-[#d9006c] focus:border-[#d9006c] focus:ring-1 focus:ring-[#d9006c] outline-none"
                       />
                     </td>
@@ -159,7 +217,7 @@ function WigVariantsSection({ variants, setVariants }) {
                       <input
                         type="text" placeholder="Density"
                         value={variant.density}
-                        onChange={(e) => updateVariant(index, 'density', e.target.value)}
+                        onChange={(e) => updateVariant(originalIndex, 'density', e.target.value)}
                         className="w-full min-w-0 border border-gray-300 rounded px-2 py-1 text-sm focus:border-[#d9006c] focus:ring-1 focus:ring-[#d9006c] outline-none"
                       />
                     </td>
@@ -167,7 +225,7 @@ function WigVariantsSection({ variants, setVariants }) {
                       <input
                         type="number" step="0.01" min="0" placeholder="0.00"
                         value={variant.price}
-                        onChange={(e) => updateVariant(index, 'price', e.target.value)}
+                        onChange={(e) => updateVariant(originalIndex, 'price', e.target.value)}
                         className="w-full min-w-0 border border-gray-300 rounded px-2 py-1 text-sm focus:border-[#d9006c] focus:ring-1 focus:ring-[#d9006c] outline-none"
                       />
                     </td>
@@ -175,14 +233,14 @@ function WigVariantsSection({ variants, setVariants }) {
                       <input
                         type="number" min="0" placeholder="0"
                         value={variant.stock}
-                        onChange={(e) => updateVariant(index, 'stock', e.target.value)}
+                        onChange={(e) => updateVariant(originalIndex, 'stock', e.target.value)}
                         className="w-full min-w-0 border border-gray-300 rounded px-2 py-1 text-sm focus:border-[#d9006c] focus:ring-1 focus:ring-[#d9006c] outline-none"
                       />
                     </td>
                     <td className="px-2 py-2 text-right">
                       <button
                         type="button"
-                        onClick={() => deleteVariant(index)}
+                        onClick={() => deleteVariant(originalIndex)}
                         className="inline-flex h-8 w-8 items-center justify-center rounded text-gray-400 transition-colors hover:bg-red-50 hover:text-red-600"
                         title="Delete variant"
                       >

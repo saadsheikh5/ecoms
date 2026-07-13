@@ -1,6 +1,7 @@
 const Order = require('../models/Order');
 const Coupon = require('../models/Coupon');
 const ApiError = require('../utils/apiError');
+const { calculateShippingCost } = require('../utils/shipping');
 
 // @route   POST /api/orders
 // @access  Public (guest checkout)
@@ -43,13 +44,13 @@ const placeOrder = async (req, res, next) => {
     }
 
     const discountedSubtotal = Math.max(subtotal - discount, 0);
-    const shipping = subtotal > 0 ? 10 : 0;
-    const tax = discountedSubtotal * 0.08;
-    const total = discountedSubtotal + shipping + tax;
+    const shippingMethod = req.body.shippingMethod || 'Ground';
+    const shipping = calculateShippingCost(shippingMethod, subtotal);
+    const total = discountedSubtotal + shipping;
 
     const order = await Order.create({
       customerName, email, phone, address,
-      items, subtotal, discount, shipping, tax, total,
+      items, subtotal, discount, shipping, shippingMethod, tax: 0, total,
       couponCode: appliedCouponCode,
       paymentMethod: paymentMethod || 'Cash on Delivery',
       notes: notes || '',

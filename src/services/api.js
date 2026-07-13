@@ -224,6 +224,7 @@ export async function placeOrder(orderDetails) {
     shipping: orderDetails.shipping || 0,
     tax: orderDetails.tax || 0,
     total: orderDetails.amount,
+    shippingMethod: orderDetails.shippingMethod || 'Ground',
     couponCode: orderDetails.couponCode || '',
     paymentMethod: orderDetails.paymentMethod || 'Credit Card'
   };
@@ -261,6 +262,7 @@ export async function createStripeCheckoutSession(orderDetails) {
       } : undefined
     })),
     couponCode: orderDetails.couponCode || '',
+    shippingMethod: orderDetails.shippingMethod || 'Ground',
     userId: orderDetails.userId || ''
   });
 
