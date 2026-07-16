@@ -2,6 +2,7 @@ const SHIPPING_METHODS = [
   { name: 'Ground', price: 9.49 },
   { name: 'Standard', price: 13.99 },
   { name: 'Express', price: 63.49 },
+  { name: 'Test Shipping', price: 0.0 },
 ];
 
 function getShippingMethodDetails(methodName = 'Ground') {
