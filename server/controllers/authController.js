@@ -113,6 +113,7 @@ const getEmailVerificationUrl = (token) => {
 
 const sendEmail = async ({ to, subject, text, html, fallbackUrl }) => {
   const transporter = getTransporter();
+  const fromAddress = getEmailFrom();
   if (process.env.NODE_ENV === 'development' && fallbackUrl) {
     console.info(`Development email link for ${to}: ${fallbackUrl}`);
   }
@@ -125,8 +126,10 @@ const sendEmail = async ({ to, subject, text, html, fallbackUrl }) => {
     throw new Error('SMTP is not configured.');
   }
 
+  console.info(`Sending email from ${fromAddress} to ${to} via ${process.env.SMTP_HOST || process.env.EMAIL_SERVICE || 'unknown transport'}`);
+
   const info = await transporter.sendMail({
-    from: getEmailFrom(),
+    from: fromAddress,
     to,
     subject,
     text,

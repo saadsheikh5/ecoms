@@ -12,7 +12,16 @@ if ($match.Success) {
     Write-Host '---Live asset response---'
     Write-Host 'Status:' $ra.StatusCode
     Write-Host 'Content-Type:' $ra.Headers['Content-Type']
-    if ($ra.Content.Length -gt 200) { Write-Host 'Length:' $ra.Content.Length; Write-Host 'Head:' $ra.Content.Substring(0,200) } else { Write-Host $ra.Content }
+    Write-Host 'Asset length:' $ra.Content.Length
+    if ($ra.Content.Length -gt 200) { Write-Host 'Head:' $ra.Content.Substring(0,200) } else { Write-Host $ra.Content }
+    $contains = $ra.Content -match 'Test Shipping'
+    Write-Host 'Contains Test Shipping:' $contains
+    if ($contains) {
+      $idx = $ra.Content.IndexOf('Test Shipping')
+      $start = [Math]::Max(0, $idx - 40)
+      $len = [Math]::Min(120, $ra.Content.Length - $start)
+      Write-Host 'Snippet:' $ra.Content.Substring($start, $len)
+    }
   } catch { Write-Host 'ERROR fetching asset:' $_.Exception.Message }
 } else { Write-Host 'No asset matched on live page' }
 
