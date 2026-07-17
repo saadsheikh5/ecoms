@@ -12,7 +12,7 @@ function getShippingMethodDetails(methodName = 'Ground') {
 }
 
 function calculateShippingCost(methodName = 'Ground', subtotal = 0) {
-  if (Number(subtotal) <= 0) {
+  if (Number(subtotal) < 0.01) {
     return 0;
   }
 
