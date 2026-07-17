@@ -4,7 +4,7 @@ export const cachedProducts = [
     "title": "test prod",
     "description": "sdhksaj",
     "category": "Lace Glues",
-    "price": 0.01,
+    "price": 0.5,
     "stock": 10,
     "image": "https://res.cloudinary.com/dxti8btbn/image/upload/v1784228742/jts-beauty/products/hvdczy19vn1d0skjdzsj.jpg",
     "images": [
@@ -13,7 +13,7 @@ export const cachedProducts = [
     "isFeatured": false,
     "variants": [],
     "createdAt": "2026-07-16T19:05:43.459Z",
-    "updatedAt": "2026-07-16T19:07:16.518Z",
+    "updatedAt": "2026-07-17T14:40:50.514Z",
     "__v": 0
   },
   {
@@ -4336,4 +4336,4 @@ export const cachedProducts = [
     "updatedAt": "2026-06-12T08:48:15.961Z"
   }
 ];
-export const cachedProductsUpdatedAt = "2026-07-16T19:22:12.408Z";
+export const cachedProductsUpdatedAt = "2026-07-17T15:03:39.872Z";
